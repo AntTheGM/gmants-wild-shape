@@ -1,0 +1,59 @@
+{
+  "id": "5e-transformations",
+  "title": "5e Transformations",
+  "description": "Streamlined Wild Shape and transformation management for D&D 5e. Pick known beast forms, transform with one click, and revert easily.",
+  "version": "0.1.0",
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13"
+  },
+  "authors": [
+    {
+      "name": "GM Ant",
+      "url": "https://roleplayr.com/gmant"
+    }
+  ],
+  "esmodules": ["scripts/main.js"],
+  "styles": ["styles/module.css"],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "relationships": {
+    "systems": [
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "compatibility": {
+          "minimum": "5.0.0"
+        }
+      }
+    ]
+  },
+  "packs": [
+    {
+      "name": "5e-transformations-macros",
+      "label": "5e Transformations Macros",
+      "path": "packs/5e-transformations-macros",
+      "type": "Macro",
+      "system": "dnd5e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    }
+  ],
+  "packFolders": [
+    {
+      "name": "5e Transformations",
+      "sorting": "m",
+      "packs": ["5e-transformations-macros"]
+    }
+  ],
+  "flags": {
+    "hotReload": true
+  }
+}

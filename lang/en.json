@@ -1,0 +1,31 @@
+{
+  "TRANSFORMATIONS.Dialog.Title": "Wild Shape",
+  "TRANSFORMATIONS.ControlButton": "Wild Shape",
+
+  "TRANSFORMATIONS.Onboarding.Title": "Choose Known Forms",
+  "TRANSFORMATIONS.Onboarding.Hint": "Select the beast forms your druid knows.",
+  "TRANSFORMATIONS.Onboarding.NoFly": "no fly",
+  "TRANSFORMATIONS.Onboarding.Confirm": "Confirm Forms",
+
+  "TRANSFORMATIONS.Transform.Title": "Wild Shape",
+  "TRANSFORMATIONS.Transform.EditForms": "Edit Known Forms",
+
+  "TRANSFORMATIONS.Transformed.CurrentForm": "Current Form",
+  "TRANSFORMATIONS.Transformed.Revert": "Revert to Original",
+  "TRANSFORMATIONS.Transformed.ChangeForm": "Transform Into Another Form",
+
+  "TRANSFORMATIONS.Button.Preview": "View Details",
+
+  "TRANSFORMATIONS.Status.Loading": "Scanning compendiums…",
+
+  "TRANSFORMATIONS.Error.NoActor": "Select a token or assign a character first.",
+  "TRANSFORMATIONS.Error.NotDruid": "This character cannot Wild Shape.",
+  "TRANSFORMATIONS.Error.NoUses": "No Wild Shape uses remaining.",
+  "TRANSFORMATIONS.Error.NoResource": "No \"Wild Shape\" resource found on character sheet. Add it to a resource slot.",
+  "TRANSFORMATIONS.Error.NoCompendiums": "No beast compendiums configured. Ask your GM to set them in Module Settings → 5e Transformations.",
+  "TRANSFORMATIONS.Error.BeastNotFound": "Could not load the beast actor from the compendium.",
+  "TRANSFORMATIONS.Error.MaxForms": "You can only select up to {max} forms.",
+
+  "TRANSFORMATIONS.Settings.BeastCompendiums": "Beast Compendiums",
+  "TRANSFORMATIONS.Settings.BeastCompendiumsHint": "Comma-separated compendium IDs to scan for beasts (e.g. dnd5e.monsters, world.custom-beasts)."
+}

@@ -1,0 +1,141 @@
+<form class="transformations-form">
+
+  {{!-- ═══════════════════════════════════════════════════════════════════ --}}
+  {{!-- ONBOARDING VIEW                                                    --}}
+  {{!-- ═══════════════════════════════════════════════════════════════════ --}}
+  {{#if (eq viewState "onboarding")}}
+
+    <div class="transformations-section">
+      <div class="transformations-section-header">
+        <label>{{localize "TRANSFORMATIONS.Onboarding.Title"}}</label>
+        <span class="transformations-count {{#if (gt selectedCount rules.maxForms)}}transformations-count-over{{/if}}">
+          {{selectedCount}} / {{rules.maxForms}}
+        </span>
+      </div>
+      <p class="transformations-hint">
+        {{localize "TRANSFORMATIONS.Onboarding.Hint"}}
+        (CR ≤ {{rules.maxCRDisplay}}{{#unless rules.allowFly}}, {{localize "TRANSFORMATIONS.Onboarding.NoFly"}}{{/unless}})
+      </p>
+    </div>
+
+    {{#if noCompendiums}}
+      <div class="transformations-empty">
+        <i class="fas fa-exclamation-triangle"></i>
+        {{localize "TRANSFORMATIONS.Error.NoCompendiums"}}
+      </div>
+    {{else if isLoading}}
+      <div class="transformations-empty">
+        <i class="fas fa-spinner fa-spin"></i> {{localize "TRANSFORMATIONS.Status.Loading"}}
+      </div>
+    {{else}}
+      <div class="transformations-beast-list transformations-scrollable-list">
+        {{#each availableBeasts}}
+          <div class="transformations-beast-entry {{#if selected}}selected{{/if}}"
+               data-action="previewForm"
+               data-uuid="{{uuid}}">
+            <input type="checkbox" class="transformations-beast-check"
+                   data-action="{{#if selected}}deselectForm{{else}}selectForm{{/if}}"
+                   data-uuid="{{uuid}}"
+                   {{#if selected}}checked{{/if}} />
+            <img src="{{img}}" class="transformations-beast-icon" alt="{{name}}" />
+            <div class="transformations-beast-info">
+              <span class="transformations-beast-name">{{name}}</span>
+              <span class="transformations-beast-cr">CR {{crDisplay}}</span>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+
+      <button type="button" class="transformations-primary-btn" data-action="confirmForms"
+              {{#unless canConfirm}}disabled{{/unless}}>
+        <i class="fas fa-check"></i> {{localize "TRANSFORMATIONS.Onboarding.Confirm"}}
+      </button>
+    {{/if}}
+
+  {{!-- ═══════════════════════════════════════════════════════════════════ --}}
+  {{!-- TRANSFORM VIEW                                                     --}}
+  {{!-- ═══════════════════════════════════════════════════════════════════ --}}
+  {{else if (eq viewState "transform")}}
+
+    <div class="transformations-section">
+      <div class="transformations-section-header">
+        <label>{{localize "TRANSFORMATIONS.Transform.Title"}}</label>
+        {{#if uses}}
+          <span class="transformations-uses {{#unless hasUses}}transformations-uses-empty{{/unless}}">
+            <i class="fas fa-paw"></i> {{uses.current}} / {{uses.max}}
+          </span>
+        {{/if}}
+      </div>
+      {{#if noResource}}
+        <p class="transformations-no-resource">
+          <i class="fas fa-exclamation-circle"></i> {{localize "TRANSFORMATIONS.Error.NoResource"}}
+        </p>
+      {{/if}}
+    </div>
+
+    <div class="transformations-form-grid">
+      {{#each knownForms}}
+        <div class="transformations-form-card {{#unless ../hasUses}}transformations-disabled{{/unless}}"
+             {{#if ../hasUses}}data-action="transform"{{/if}}
+             data-uuid="{{uuid}}">
+          <img src="{{img}}" class="transformations-form-img" alt="{{name}}" />
+          <div class="transformations-form-label">
+            <span class="transformations-form-name">{{name}}</span>
+            <span class="transformations-form-cr">CR {{crDisplay}}</span>
+          </div>
+          <button type="button" class="transformations-preview-btn transformations-card-preview"
+                  data-action="previewForm" data-uuid="{{uuid}}" title="{{localize 'TRANSFORMATIONS.Button.Preview'}}">
+            <i class="fas fa-eye"></i>
+          </button>
+        </div>
+      {{/each}}
+    </div>
+
+    <button type="button" class="transformations-secondary-btn" data-action="editForms">
+      <i class="fas fa-pen"></i> {{localize "TRANSFORMATIONS.Transform.EditForms"}}
+    </button>
+
+  {{!-- ═══════════════════════════════════════════════════════════════════ --}}
+  {{!-- TRANSFORMED VIEW                                                   --}}
+  {{!-- ═══════════════════════════════════════════════════════════════════ --}}
+  {{else if (eq viewState "transformed")}}
+
+    <div class="transformations-section transformations-current-form">
+      <div class="transformations-section-header">
+        <label>{{localize "TRANSFORMATIONS.Transformed.CurrentForm"}}</label>
+      </div>
+      <div class="transformations-current-info">
+        <img src="{{currentForm.img}}" class="transformations-form-img-large" alt="{{currentForm.name}}" />
+        <h3 class="transformations-current-name">{{currentForm.name}}</h3>
+      </div>
+    </div>
+
+    <div class="transformations-action-buttons">
+      <button type="button" class="transformations-primary-btn" data-action="revert">
+        <i class="fas fa-undo"></i> {{localize "TRANSFORMATIONS.Transformed.Revert"}}
+      </button>
+    </div>
+
+    {{#if hasUses}}
+      <details class="transformations-advanced">
+        <summary class="transformations-details-header">
+          <i class="fas fa-exchange-alt"></i> {{localize "TRANSFORMATIONS.Transformed.ChangeForm"}}
+        </summary>
+        <div class="transformations-advanced-content">
+          <div class="transformations-form-grid">
+            {{#each knownForms}}
+              <div class="transformations-form-card" data-action="transform" data-uuid="{{uuid}}">
+                <img src="{{img}}" class="transformations-form-img" alt="{{name}}" />
+                <div class="transformations-form-label">
+                  <span class="transformations-form-name">{{name}}</span>
+                  <span class="transformations-form-cr">CR {{crDisplay}}</span>
+                </div>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+      </details>
+    {{/if}}
+
+  {{/if}}
+</form>
