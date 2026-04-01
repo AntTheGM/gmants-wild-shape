@@ -138,6 +138,57 @@ export class TransformationDialog extends HandlebarsApplicationMixin(Application
     super._onRender(context, options);
     this.#injectBranding();
     this.#restorePosition();
+    this.#bindCardClicks();
+  }
+
+  /**
+   * Bind click listeners on form cards and beast entries.
+   * ApplicationV2 data-action delegation only fires on interactive elements
+   * (buttons, anchors), so divs need manual binding.
+   */
+  #bindCardClicks() {
+    // Transform form cards
+    for (const card of this.element.querySelectorAll(".transformations-form-card[data-uuid]")) {
+      card.addEventListener("click", async (event) => {
+        if (event.target.closest(".transformations-preview-btn")) return;
+        const uuid = card.dataset.uuid;
+        if (uuid) await this.#handleTransform(uuid);
+      });
+    }
+
+    // Onboarding beast entries (click row to preview)
+    for (const entry of this.element.querySelectorAll(".transformations-beast-entry[data-uuid]")) {
+      entry.addEventListener("click", async (event) => {
+        if (event.target.closest(".transformations-beast-check")) return;
+        const uuid = entry.dataset.uuid;
+        if (!uuid) return;
+        const actor = await loadActorFromUuid(uuid);
+        if (actor) actor.sheet.render(true);
+      });
+    }
+
+    // Onboarding checkboxes (toggle selection)
+    for (const check of this.element.querySelectorAll(".transformations-beast-check")) {
+      check.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const uuid = check.dataset.uuid;
+        if (!uuid) return;
+        if (check.checked) {
+          const rules = getFormRules(this.#getOriginalActor());
+          if (this.#selectedFormUuids.size >= (rules?.maxForms ?? 4)) {
+            ui.notifications.warn(
+              game.i18n.format("TRANSFORMATIONS.Error.MaxForms", { max: rules.maxForms })
+            );
+            check.checked = false;
+            return;
+          }
+          this.#selectedFormUuids.add(uuid);
+        } else {
+          this.#selectedFormUuids.delete(uuid);
+        }
+        this.render();
+      });
+    }
   }
 
   #injectBranding() {
@@ -229,12 +280,17 @@ export class TransformationDialog extends HandlebarsApplicationMixin(Application
   }
 
   /**
-   * Transform into a selected beast form.
+   * Transform into a selected beast form (static action handler delegate).
    */
   static async #onTransform(event, target) {
     const uuid = target.closest("[data-uuid]")?.dataset.uuid;
-    if (!uuid) return;
+    if (uuid) await this.#handleTransform(uuid);
+  }
 
+  /**
+   * Core transformation logic — called from both action handler and click listener.
+   */
+  async #handleTransform(uuid) {
     const originalActor = this.#getOriginalActor();
 
     // Decrement Wild Shape use
@@ -255,13 +311,12 @@ export class TransformationDialog extends HandlebarsApplicationMixin(Application
     const presetSettings = CONFIG.DND5E?.transformation?.presets?.wildshape?.settings;
     let settings;
     if (presetSettings) {
-      settings = new dnd5e.dataModels.transformation.TransformationSetting({
+      settings = new dnd5e.dataModels.settings.TransformationSetting({
         ...presetSettings,
         preset: "wildshape",
       });
     } else {
-      // Fallback: create settings and apply wildshape preset manually
-      settings = new dnd5e.dataModels.transformation.TransformationSetting({
+      settings = new dnd5e.dataModels.settings.TransformationSetting({
         preset: "wildshape",
       });
     }

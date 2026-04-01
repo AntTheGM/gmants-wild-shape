@@ -35,6 +35,7 @@ function findWildShapeResourceSlot(actor) {
 /**
  * Get current and max Wild Shape uses.
  * Checks item uses first (5e v5+), falls back to resource slots.
+ * In 5e v5+, uses.value is a computed getter (max - spent).
  * @returns {{ current: number, max: number, source: "item"|"resource" } | null}
  */
 export function getWildShapeUses(actor) {
@@ -64,6 +65,7 @@ export function getWildShapeUses(actor) {
 
 /**
  * Decrement one Wild Shape use. Returns true if successful.
+ * In 5e v5+, uses track "spent" count (not remaining). Incrementing spent = decrementing uses.
  */
 export async function decrementWildShapeUse(actor) {
   // Try item first
@@ -71,7 +73,9 @@ export async function decrementWildShapeUse(actor) {
   if (item) {
     const uses = item.system.uses;
     if ((uses.value ?? 0) <= 0) return false;
-    await item.update({ "system.uses.value": uses.value - 1 });
+    // 5e v5+ uses "spent" — increment spent to consume a use
+    await item.update({ "system.uses.spent": (uses.spent ?? 0) + 1 });
+    console.log(`5e-transformations | Decremented Wild Shape: spent ${uses.spent ?? 0} → ${(uses.spent ?? 0) + 1}, remaining ${uses.value - 1}/${uses.max}`);
     return true;
   }
 
