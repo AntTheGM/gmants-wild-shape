@@ -68,9 +68,16 @@
               <span class="eladrin-no-images">{{localize "TRANSFORMATIONS.Eladrin.NoImages"}}</span>
             {{/if}}
           </div>
-          <button type="button" class="eladrin-save-btn" data-action="saveSeason" data-season="{{id}}">
-            <i class="fas fa-camera"></i> Save Current
-          </button>
+          <div class="eladrin-config-buttons">
+            <button type="button" class="eladrin-save-btn" data-action="saveSeason" data-season="{{id}}">
+              <i class="fas fa-camera"></i> Save Current
+            </button>
+            {{#if hasImages}}
+              <button type="button" class="eladrin-delete-btn" data-action="deleteSeason" data-season="{{id}}" title="{{localize 'TRANSFORMATIONS.Eladrin.DeleteImages'}}">
+                <i class="fas fa-trash"></i>
+              </button>
+            {{/if}}
+          </div>
         </div>
       {{/each}}
     </div>

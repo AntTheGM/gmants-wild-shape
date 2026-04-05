@@ -1,6 +1,6 @@
 # Eladrin Season Transformations
 
-**Status**: Phase 1 — NOT STARTED
+**Status**: Complete
 **Last Updated**: 2026-04-04
 
 ---
@@ -137,64 +137,64 @@ Two-path detection in `season-data.js`:
 
 ## Implementation Phases
 
-### Phase 1: Foundation — NOT STARTED
+### Phase 1: Foundation — COMPLETE
 
 Core infrastructure: constants, settings, detection logic, and the basic dialog that displays seasons.
 
-- [ ] Add eladrin constants to `scripts/const.js` (`SEASONS` enum, `ELADRIN_FLAGS`)
-- [ ] Add eladrin settings to `scripts/settings.js` (`showEladrinButton`, `eladrinDialogPosition`, `useMidiQol`)
-- [ ] Create `scripts/eladrin/season-data.js` with `isEladrin(actor)` detection and season definitions
-- [ ] Create `scripts/eladrin/image-manager.js` with save/load image flag helpers
-- [ ] Create `scripts/eladrin/eladrin-dialog.js` — basic ApplicationV2 dialog showing 4 season buttons with current season highlighted
-- [ ] Create `templates/eladrin-dialog.hbs` — template with season buttons and collapsible config section
-- [ ] Add eladrin i18n strings to `lang/en.json`
-- [ ] Add eladrin CSS to `styles/module.css`
-- [ ] Wire up scene control button and API in `scripts/main.js`
+- [x] Add eladrin constants to `scripts/const.js` (`SEASONS` enum, `ELADRIN_FLAGS`)
+- [x] Add eladrin settings to `scripts/settings.js` (`showEladrinButton`, `eladrinDialogPosition`, `useMidiQol`)
+- [x] Create `scripts/eladrin/season-data.js` with `isEladrin(actor)` detection and season definitions
+- [x] Create `scripts/eladrin/image-manager.js` with save/load image flag helpers
+- [x] Create `scripts/eladrin/eladrin-dialog.js` — basic ApplicationV2 dialog showing 4 season buttons with current season highlighted
+- [x] Create `templates/eladrin-dialog.hbs` — template with season buttons and collapsible config section
+- [x] Add eladrin i18n strings to `lang/en.json`
+- [x] Add eladrin CSS to `styles/module.css`
+- [x] Wire up scene control button and API in `scripts/main.js`
 
 > **Watch out:** The scene control button hook (`getSceneControlButtons`) is already used for Wild Shape. Both buttons need to coexist — use the existing pattern but with a separate settings check.
 
-### Phase 2: Image Management — NOT STARTED
+### Phase 2: Image Management — COMPLETE
 
 **Depends on:** Phase 1
 
 The "save current look" workflow and image swapping on season change.
 
-- [ ] Implement "Save Current as [Season]" — captures `actor.img` and active token's `texture.src`, saves to actor flags
-- [ ] Show token + portrait thumbnails in the config section for each season (placeholder if not yet saved)
-- [ ] Implement season change image swap — update `actor.img`, `prototypeToken.texture.src`, and active canvas token
-- [ ] Post chat card on season change: "[Name] shifts to their [Season] aspect."
-- [ ] Handle edge cases: no images saved for target season (warn but allow), no active token on canvas (skip token update)
+- [x] Implement "Save Current as [Season]" — captures `actor.img` and active token's `texture.src`, saves to actor flags
+- [x] Show token + portrait thumbnails in the config section for each season (placeholder if not yet saved)
+- [x] Implement season change image swap — update `actor.img`, `prototypeToken.texture.src`, and active canvas token
+- [x] Post chat card on season change: "[Name] shifts to their [Season] aspect."
+- [x] Handle edge cases: no images saved for target season (warn but allow), no active token on canvas (skip token update)
 
 > **Watch out:** Updating `actor.img` is straightforward, but token texture requires both prototype token update (for future tokens) AND active token update (for the current scene). Use `token.document.update()` for the active token.
 
-### Phase 3: Fey Step Item Swap — NOT STARTED
+### Phase 3: Fey Step Item Swap — COMPLETE
 
 **Depends on:** Phase 2
 
 Create compendium items and implement the feature swap logic.
 
-- [ ] Create 4 Fey Step item JSON source files (Spring, Summer, Autumn, Winter) in `packs/_source/`
-- [ ] Create 4 Eladrin Season tracker item JSON source files
-- [ ] Add the items compendium pack to `module.json`
-- [ ] Build the LevelDB compendium from source JSON
-- [ ] Implement item swap logic in `season-data.js`: find existing Fey Step/Season items on actor, remove them, add new season's items from compendium
-- [ ] Wire item swap into the season change flow in the dialog
-- [ ] Add MIDI QOL toggle setting — when enabled, use alternate item versions with automation fields (stretch goal, can be a later phase)
+- [x] Create 4 Fey Step item JSON source files (Spring, Summer, Autumn, Winter) in `packs/_source/`
+- [x] Create 4 Eladrin Season tracker item JSON source files
+- [x] Add the items compendium pack to `module.json`
+- [x] Build the LevelDB compendium from source JSON
+- [x] Implement item swap logic in `season-data.js`: find existing Fey Step/Season items on actor, remove them, add new season's items from compendium
+- [x] Wire item swap into the season change flow in the dialog
+- [x] Add MIDI QOL toggle setting — when enabled, use alternate item versions with automation fields (stretch goal, can be a later phase)
 
 > **Watch out:** Item UUIDs in compendiums are generated at build time. Use name-based lookup (`actor.items.find(i => i.name.startsWith("Fey Step:"))`) rather than UUID matching for finding existing items on the actor.
 
-### Phase 4: Macro & Polish — NOT STARTED
+### Phase 4: Macro & Polish — COMPLETE
 
 **Depends on:** Phase 3
 
 Compendium macro, final polish, deployment.
 
-- [ ] Create "Change Season" macro JSON in `packs/_source/5e-transformations-macros/`
-- [ ] Rebuild the macros compendium to include the new macro
-- [ ] Add eladrin opt-in toggle (for non-Eladrin characters) — either via dialog config or right-click actor option
-- [ ] Update `CLAUDE.md` with eladrin architecture documentation
-- [ ] Update `README.md` with eladrin feature documentation
-- [ ] Deploy and test end-to-end
+- [x] Create "Change Season" macro JSON in `packs/_source/5e-transformations-macros/`
+- [x] Rebuild the macros compendium to include the new macro
+- [x] Add eladrin opt-in toggle (for non-Eladrin characters) — either via dialog config or right-click actor option
+- [x] Update `CLAUDE.md` with eladrin architecture documentation
+- [x] Update `README.md` with eladrin feature documentation
+- [x] Deploy and test end-to-end
 
 ---
 
@@ -214,6 +214,6 @@ Compendium macro, final polish, deployment.
 
 ## Open Questions
 
-- [ ] Should the Eladrin Season tracker items be passive features with no mechanical effect, or should they grant some system-level tag? (Likely passive — just a label)
-- [ ] Do we need to handle the ability modifier choice (Int/Wis/Cha) in the Fey Step items, or is that baked into the DC formula? (Check 5e system item schema)
+- [x] Should the Eladrin Season tracker items be passive features with no mechanical effect, or should they grant some system-level tag? (Likely passive — just a label)
+- [x] Do we need to handle the ability modifier choice (Int/Wis/Cha) in the Fey Step items, or is that baked into the DC formula? (Check 5e system item schema)
 - [x] Are per-season Fey Step items in the SRD? — No, only in Chris-Premades as sub-activities on one item

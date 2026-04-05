@@ -6,9 +6,9 @@
   "effects": [],
   "system": {
     "activities": {
-      "feyStepTeleport01": {
+      "feyStpTlprt00001": {
         "type": "utility",
-        "_id": "feyStepTeleport01",
+        "_id": "feyStpTlprt00001",
         "name": "Fey Step (Teleport)",
         "sort": 0,
         "activation": {
@@ -82,9 +82,9 @@
         },
         "flags": {}
       },
-      "feyStepWinter001": {
+      "feyStpWinter0001": {
         "type": "save",
-        "_id": "feyStepWinter001",
+        "_id": "feyStpWinter0001",
         "name": "Winter (Frighten)",
         "sort": 100,
         "activation": {

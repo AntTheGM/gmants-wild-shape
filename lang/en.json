@@ -56,5 +56,10 @@
   "TRANSFORMATIONS.Eladrin.Season.autumn": "Autumn",
   "TRANSFORMATIONS.Eladrin.Season.winter": "Winter",
 
+  "TRANSFORMATIONS.Eladrin.DeleteImages": "Delete saved images",
+  "TRANSFORMATIONS.Eladrin.DeleteImagesTitle": "Delete {season} Images",
+  "TRANSFORMATIONS.Eladrin.DeleteImagesConfirm": "Delete saved images for {season}? This will remove the copied files but will not affect the current token or portrait.",
+  "TRANSFORMATIONS.Eladrin.ImagesDeleted": "Saved images for {season} have been deleted.",
+
   "TRANSFORMATIONS.Error.NotEladrin": "This character is not an Eladrin."
 }

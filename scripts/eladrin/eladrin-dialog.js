@@ -8,8 +8,9 @@ import {
 } from "./season-data.js";
 import {
   getAllSeasonImages,
-  saveCurrentAsseason,
+  saveCurrentAsSeason,
   applySeasonImages,
+  deleteSeasonImages,
 } from "./image-manager.js";
 import { swapSeasonItems } from "./compendium-seeder.js";
 
@@ -30,6 +31,7 @@ export class EladrinSeasonDialog extends HandlebarsApplicationMixin(
     actions: {
       changeSeason: EladrinSeasonDialog.#onChangeSeason,
       saveSeason: EladrinSeasonDialog.#onSaveSeason,
+      deleteSeason: EladrinSeasonDialog.#onDeleteSeason,
     },
   };
 
@@ -59,6 +61,7 @@ export class EladrinSeasonDialog extends HandlebarsApplicationMixin(
       images: allImages[s.id] ?? { token: null, portrait: null },
       hasImages: !!(allImages[s.id]?.token || allImages[s.id]?.portrait),
     }));
+    context.hasAnyImages = context.seasons.some((s) => s.hasImages);
 
     return context;
   }
@@ -112,7 +115,7 @@ export class EladrinSeasonDialog extends HandlebarsApplicationMixin(
       })
     );
 
-    this.render();
+    await this.close();
   }
 
   /**
@@ -122,7 +125,7 @@ export class EladrinSeasonDialog extends HandlebarsApplicationMixin(
     const seasonId = target.dataset.season;
     if (!seasonId || !SEASONS[seasonId]) return;
 
-    await saveCurrentAsseason(this.#actor, seasonId);
+    await saveCurrentAsSeason(this.#actor, seasonId);
 
     ui.notifications.info(
       game.i18n.format("TRANSFORMATIONS.Eladrin.ImageSaved", {
@@ -130,6 +133,27 @@ export class EladrinSeasonDialog extends HandlebarsApplicationMixin(
       })
     );
 
+    this.render();
+  }
+
+  /**
+   * Delete saved images for a single season.
+   */
+  static async #onDeleteSeason(event, target) {
+    const seasonId = target.dataset.season;
+    if (!seasonId || !SEASONS[seasonId]) return;
+
+    const label = getSeasonLabel(seasonId);
+    const confirmed = await foundry.applications.api.DialogV2.confirm({
+      window: { title: game.i18n.format("TRANSFORMATIONS.Eladrin.DeleteImagesTitle", { season: label }) },
+      content: game.i18n.format("TRANSFORMATIONS.Eladrin.DeleteImagesConfirm", { season: label }),
+    });
+    if (!confirmed) return;
+
+    await deleteSeasonImages(this.#actor, seasonId);
+    ui.notifications.info(
+      game.i18n.format("TRANSFORMATIONS.Eladrin.ImagesDeleted", { season: label })
+    );
     this.render();
   }
 

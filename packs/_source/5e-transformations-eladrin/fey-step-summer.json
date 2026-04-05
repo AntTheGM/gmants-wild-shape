@@ -6,9 +6,9 @@
   "effects": [],
   "system": {
     "activities": {
-      "feyStepTeleport01": {
+      "feyStpTlprt00001": {
         "type": "utility",
-        "_id": "feyStepTeleport01",
+        "_id": "feyStpTlprt00001",
         "name": "Fey Step (Teleport)",
         "sort": 0,
         "activation": {
@@ -82,9 +82,9 @@
         },
         "flags": {}
       },
-      "feyStepSummer001": {
+      "feyStpSummer0001": {
         "type": "damage",
-        "_id": "feyStepSummer001",
+        "_id": "feyStpSummer0001",
         "name": "Summer (Fire Damage)",
         "sort": 100,
         "activation": {

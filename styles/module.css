@@ -598,3 +598,24 @@ a.transformations-branding:hover {
 .eladrin-save-btn i {
   margin-right: 0.2rem;
 }
+
+/* --- Config Row Buttons --- */
+.eladrin-config-buttons {
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.eladrin-delete-btn {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.4rem;
+  cursor: pointer;
+  opacity: 0.4;
+  color: var(--transformations-brand);
+  border-color: var(--transformations-border);
+}
+
+.eladrin-delete-btn:hover {
+  opacity: 1;
+  border-color: var(--transformations-brand);
+}
