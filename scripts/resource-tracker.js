@@ -75,7 +75,7 @@ export async function decrementWildShapeUse(actor) {
     if ((uses.value ?? 0) <= 0) return false;
     // 5e v5+ uses "spent" — increment spent to consume a use
     await item.update({ "system.uses.spent": (uses.spent ?? 0) + 1 });
-    console.log(`5e-transformations | Decremented Wild Shape: spent ${uses.spent ?? 0} → ${(uses.spent ?? 0) + 1}, remaining ${uses.value - 1}/${uses.max}`);
+    console.log(`gmants-wild-shape | Decremented Wild Shape: spent ${uses.spent ?? 0} → ${(uses.spent ?? 0) + 1}, remaining ${uses.value - 1}/${uses.max}`);
     return true;
   }
 

@@ -1,9 +1,9 @@
 #!/bin/bash
-# Deploy 5e Transformations to live Foundry modules directory
+# Deploy GMAnt's Wild Shape to live Foundry modules directory
 # Usage: bash deploy.sh
 
 SRC="R:/Foundry/Modules/5e_Transformations"
-DEST="R:/Foundry/Data/modules/5e-transformations"
+DEST="R:/Foundry/Data/modules/gmants-wild-shape"
 
 mkdir -p "$DEST"
 
@@ -15,5 +15,5 @@ cp -r "$SRC/lang" "$DEST/"
 [ -d "$SRC/assets" ] && cp -r "$SRC/assets" "$DEST/"
 [ -d "$SRC/packs" ] && cp -r "$SRC/packs" "$DEST/"
 
-echo "Deployed 5e-transformations to $DEST"
+echo "Deployed gmants-wild-shape to $DEST"
 echo "Refresh your browser (F5) to pick up changes."

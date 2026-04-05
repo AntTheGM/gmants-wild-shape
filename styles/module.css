@@ -1,48 +1,48 @@
 /* ═══════════════════════════════════════════════════════════════════════════
-   5e Transformations — VTTools by GM Ant
+   GMAnt's Wild Shape — VTTools by GM Ant
    ═══════════════════════════════════════════════════════════════════════════ */
 
 /* --- Color Palette (scoped to app class) --- */
-.transformations {
-  --transformations-brand: #a44;
-  --transformations-gold: #b8860b;
-  --transformations-gold-light: #daa520;
-  --transformations-success: #4a4;
-  --transformations-purple: #8a7ec0;
-  --transformations-purple-bg: rgba(90, 78, 140, 0.08);
-  --transformations-purple-border: rgba(90, 78, 140, 0.15);
-  --transformations-warning: #c5a028;
+.wild-shape {
+  --wild-shape-brand: #a44;
+  --wild-shape-gold: #b8860b;
+  --wild-shape-gold-light: #daa520;
+  --wild-shape-success: #4a4;
+  --wild-shape-purple: #8a7ec0;
+  --wild-shape-purple-bg: rgba(90, 78, 140, 0.08);
+  --wild-shape-purple-border: rgba(90, 78, 140, 0.15);
+  --wild-shape-warning: #c5a028;
 
-  --transformations-border: rgba(128, 128, 128, 0.2);
-  --transformations-border-light: rgba(128, 128, 128, 0.15);
-  --transformations-border-hover: rgba(128, 128, 128, 0.1);
+  --wild-shape-border: rgba(128, 128, 128, 0.2);
+  --wild-shape-border-light: rgba(128, 128, 128, 0.15);
+  --wild-shape-border-hover: rgba(128, 128, 128, 0.1);
 
-  --transformations-bg-inset: rgba(0, 0, 0, 0.05);
-  --transformations-bg-subtle: rgba(0, 0, 0, 0.03);
-  --transformations-bg-faint: rgba(0, 0, 0, 0.02);
-  --transformations-bg-hover: rgba(0, 0, 0, 0.06);
-  --transformations-bg-selected: rgba(0, 0, 0, 0.04);
-  --transformations-bg-border: rgba(0, 0, 0, 0.08);
-  --transformations-bg-shadow: rgba(0, 0, 0, 0.15);
-  --transformations-bg-shadow-dark: rgba(0, 0, 0, 0.2);
+  --wild-shape-bg-inset: rgba(0, 0, 0, 0.05);
+  --wild-shape-bg-subtle: rgba(0, 0, 0, 0.03);
+  --wild-shape-bg-faint: rgba(0, 0, 0, 0.02);
+  --wild-shape-bg-hover: rgba(0, 0, 0, 0.06);
+  --wild-shape-bg-selected: rgba(0, 0, 0, 0.04);
+  --wild-shape-bg-border: rgba(0, 0, 0, 0.08);
+  --wild-shape-bg-shadow: rgba(0, 0, 0, 0.15);
+  --wild-shape-bg-shadow-dark: rgba(0, 0, 0, 0.2);
 }
 
 /* --- Branding --- */
-a.transformations-branding {
+a.wild-shape-branding {
   margin-left: auto;
   font-style: italic;
-  color: var(--transformations-brand);
+  color: var(--wild-shape-brand);
   font-size: 0.75rem;
   text-decoration: none;
 }
 
-a.transformations-branding:hover {
+a.wild-shape-branding:hover {
   text-decoration: underline;
-  color: var(--transformations-gold-light);
+  color: var(--wild-shape-gold-light);
 }
 
 /* --- Form Container --- */
-.transformations-form {
+.wild-shape-form {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -51,19 +51,19 @@ a.transformations-branding:hover {
 }
 
 /* --- Sections --- */
-.transformations-section {
+.wild-shape-section {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
 }
 
-.transformations-section-header {
+.wild-shape-section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.transformations-section-header label {
+.wild-shape-section-header label {
   font-weight: bold;
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -72,7 +72,7 @@ a.transformations-branding:hover {
 }
 
 /* --- Hint Text --- */
-.transformations-hint {
+.wild-shape-hint {
   margin: 0;
   font-size: 0.75rem;
   font-style: italic;
@@ -80,52 +80,52 @@ a.transformations-branding:hover {
 }
 
 /* --- Count Badge --- */
-.transformations-count {
+.wild-shape-count {
   font-weight: bold;
   font-size: 0.8rem;
-  color: var(--transformations-gold);
+  color: var(--wild-shape-gold);
 }
 
-.transformations-count-over {
-  color: var(--transformations-brand);
+.wild-shape-count-over {
+  color: var(--wild-shape-brand);
 }
 
 /* --- Uses Display --- */
-.transformations-uses {
+.wild-shape-uses {
   font-weight: bold;
   font-size: 0.8rem;
-  color: var(--transformations-success);
+  color: var(--wild-shape-success);
 }
 
-.transformations-uses i {
+.wild-shape-uses i {
   margin-right: 0.2rem;
 }
 
-.transformations-uses-empty {
-  color: var(--transformations-brand);
+.wild-shape-uses-empty {
+  color: var(--wild-shape-brand);
 }
 
 /* --- Empty / Loading States --- */
-.transformations-empty {
+.wild-shape-empty {
   text-align: center;
   opacity: 0.5;
   font-style: italic;
   padding: 1rem 0;
 }
 
-.transformations-empty i {
+.wild-shape-empty i {
   margin-right: 0.35rem;
 }
 
 /* --- No Resource Warning --- */
-.transformations-no-resource {
+.wild-shape-no-resource {
   margin: 0;
   font-style: italic;
-  color: var(--transformations-brand);
+  color: var(--wild-shape-brand);
   font-size: 0.8rem;
 }
 
-.transformations-no-resource i {
+.wild-shape-no-resource i {
   margin-right: 0.2rem;
 }
 
@@ -133,19 +133,19 @@ a.transformations-branding:hover {
    ONBOARDING — Beast List
    ═══════════════════════════════════════════════════════════════════════════ */
 
-.transformations-scrollable-list {
+.wild-shape-scrollable-list {
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
   max-height: 380px;
   overflow-y: auto;
-  border: 1px solid var(--transformations-border-light);
+  border: 1px solid var(--wild-shape-border-light);
   border-radius: 4px;
   padding: 0.35rem;
-  background: var(--transformations-bg-faint);
+  background: var(--wild-shape-bg-faint);
 }
 
-.transformations-beast-entry {
+.wild-shape-beast-entry {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -156,51 +156,51 @@ a.transformations-branding:hover {
   transition: background 0.15s;
 }
 
-.transformations-beast-entry:hover {
-  background: var(--transformations-bg-hover);
+.wild-shape-beast-entry:hover {
+  background: var(--wild-shape-bg-hover);
 }
 
-.transformations-beast-entry.selected {
-  background: var(--transformations-purple-bg);
-  border: 1px solid var(--transformations-purple-border);
+.wild-shape-beast-entry.selected {
+  background: var(--wild-shape-purple-bg);
+  border: 1px solid var(--wild-shape-purple-border);
   padding: 0.25rem 0.35rem; /* compensate for border */
 }
 
-.transformations-beast-check {
+.wild-shape-beast-check {
   margin: 0;
   cursor: pointer;
   flex-shrink: 0;
 }
 
-.transformations-beast-icon {
+.wild-shape-beast-icon {
   width: 28px;
   height: 28px;
-  border: 1px solid var(--transformations-bg-shadow);
+  border: 1px solid var(--wild-shape-bg-shadow);
   border-radius: 3px;
   object-fit: cover;
   flex-shrink: 0;
 }
 
-.transformations-beast-info {
+.wild-shape-beast-info {
   display: flex;
   flex-direction: column;
   min-width: 0;
   flex: 1;
 }
 
-.transformations-beast-name {
+.wild-shape-beast-name {
   font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.transformations-beast-cr {
+.wild-shape-beast-cr {
   font-size: 0.7rem;
   opacity: 0.6;
 }
 
-.transformations-preview-btn {
+.wild-shape-preview-btn {
   background: none;
   border: none;
   cursor: pointer;
@@ -212,50 +212,50 @@ a.transformations-branding:hover {
   transition: opacity 0.15s;
 }
 
-.transformations-preview-btn:hover {
+.wild-shape-preview-btn:hover {
   opacity: 1;
-  background: var(--transformations-bg-hover);
+  background: var(--wild-shape-bg-hover);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
    TRANSFORM — Form Card Grid
    ═══════════════════════════════════════════════════════════════════════════ */
 
-.transformations-form-grid {
+.wild-shape-form-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.5rem;
 }
 
-.transformations-form-card {
+.wild-shape-form-card {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.35rem;
   padding: 0.5rem;
-  border: 1px solid var(--transformations-border);
+  border: 1px solid var(--wild-shape-border);
   border-radius: 4px;
-  background: var(--transformations-bg-inset);
+  background: var(--wild-shape-bg-inset);
   cursor: pointer;
   user-select: none;
   transition: box-shadow 0.2s, border-color 0.2s;
 }
 
-.transformations-form-card:hover {
-  border-color: var(--transformations-gold);
+.wild-shape-form-card:hover {
+  border-color: var(--wild-shape-gold);
   box-shadow: 0 0 8px rgba(184, 134, 11, 0.25);
 }
 
-.transformations-form-img {
+.wild-shape-form-img {
   width: 48px;
   height: 48px;
-  border: 1px solid var(--transformations-bg-shadow);
+  border: 1px solid var(--wild-shape-bg-shadow);
   border-radius: 4px;
   object-fit: cover;
 }
 
-.transformations-form-label {
+.wild-shape-form-label {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -263,7 +263,7 @@ a.transformations-branding:hover {
   gap: 0.1rem;
 }
 
-.transformations-form-name {
+.wild-shape-form-name {
   font-weight: bold;
   font-size: 0.8rem;
   white-space: nowrap;
@@ -272,12 +272,12 @@ a.transformations-branding:hover {
   max-width: 140px;
 }
 
-.transformations-form-cr {
+.wild-shape-form-cr {
   font-size: 0.7rem;
   opacity: 0.6;
 }
 
-.transformations-card-preview {
+.wild-shape-card-preview {
   position: absolute;
   top: 0.2rem;
   right: 0.2rem;
@@ -287,37 +287,37 @@ a.transformations-branding:hover {
    TRANSFORMED — Current Form Display
    ═══════════════════════════════════════════════════════════════════════════ */
 
-.transformations-current-info {
+.wild-shape-current-info {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   padding: 0.5rem;
-  background: var(--transformations-bg-inset);
-  border: 1px solid var(--transformations-bg-border);
+  background: var(--wild-shape-bg-inset);
+  border: 1px solid var(--wild-shape-bg-border);
   border-radius: 4px;
 }
 
-.transformations-form-img-large {
+.wild-shape-form-img-large {
   width: 64px;
   height: 64px;
-  border: 1px solid var(--transformations-bg-shadow);
+  border: 1px solid var(--wild-shape-bg-shadow);
   border-radius: 4px;
   object-fit: cover;
 }
 
-.transformations-current-name {
+.wild-shape-current-name {
   margin: 0;
   font-size: 1.1rem;
 }
 
 /* --- Action Buttons --- */
-.transformations-action-buttons {
+.wild-shape-action-buttons {
   display: flex;
   gap: 0.5rem;
   margin-top: 0.5rem;
 }
 
-.transformations-action-buttons .transformations-primary-btn {
+.wild-shape-action-buttons .wild-shape-primary-btn {
   flex: 1;
   margin-top: 0;
 }
@@ -327,12 +327,12 @@ a.transformations-branding:hover {
    ═══════════════════════════════════════════════════════════════════════════ */
 
 /* --- Primary Button (gold shimmer) --- */
-@keyframes transformations-shimmer {
+@keyframes wild-shape-shimmer {
   0% { background-position: 200% center; }
   100% { background-position: -200% center; }
 }
 
-.transformations .transformations-primary-btn {
+.wild-shape .wild-shape-primary-btn {
   font-weight: bold;
   font-size: 1rem;
   padding: 0.5rem;
@@ -342,11 +342,11 @@ a.transformations-branding:hover {
     linear-gradient(100deg, transparent 30%, rgba(184, 134, 11, 0.08) 50%, transparent 70%),
     linear-gradient(to bottom, rgba(184, 134, 11, 0.15), rgba(184, 134, 11, 0.05));
   background-size: 200% 100%, 100% 100%;
-  animation: transformations-shimmer 4s ease-in-out infinite;
+  animation: wild-shape-shimmer 4s ease-in-out infinite;
   transition: box-shadow 0.2s, background 0.2s;
 }
 
-.transformations .transformations-primary-btn:hover {
+.wild-shape .wild-shape-primary-btn:hover {
   box-shadow: 0 0 8px rgba(184, 134, 11, 0.3);
   background:
     linear-gradient(100deg, transparent 30%, rgba(184, 134, 11, 0.12) 50%, transparent 70%),
@@ -354,53 +354,53 @@ a.transformations-branding:hover {
   background-size: 200% 100%, 100% 100%;
 }
 
-.transformations .transformations-primary-btn:active {
+.wild-shape .wild-shape-primary-btn:active {
   box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4), 0 0 12px rgba(184, 134, 11, 0.4);
   background: linear-gradient(to bottom, rgba(184, 134, 11, 0.08), rgba(184, 134, 11, 0.2));
 }
 
-.transformations .transformations-primary-btn:disabled {
+.wild-shape .wild-shape-primary-btn:disabled {
   opacity: 0.35;
   cursor: not-allowed;
   animation: none;
   box-shadow: none;
 }
 
-.transformations-primary-btn i {
+.wild-shape-primary-btn i {
   margin-right: 0.35rem;
 }
 
 /* --- Secondary Button --- */
-.transformations-secondary-btn {
+.wild-shape-secondary-btn {
   font-weight: bold;
   padding: 0.5rem 0.75rem;
   cursor: pointer;
   white-space: nowrap;
 }
 
-.transformations-secondary-btn i {
+.wild-shape-secondary-btn i {
   margin-right: 0.15rem;
 }
 
 /* --- Disabled State --- */
-.transformations-disabled {
+.wild-shape-disabled {
   opacity: 0.5;
 }
 
-.transformations-disabled,
-.transformations-disabled * {
+.wild-shape-disabled,
+.wild-shape-disabled * {
   cursor: not-allowed !important;
 }
 
 /* --- Collapsible Details (Change Form) --- */
-.transformations-advanced {
+.wild-shape-advanced {
   margin-top: 0.25rem;
-  border: 1px solid var(--transformations-border);
+  border: 1px solid var(--wild-shape-border);
   border-radius: 4px;
-  background: var(--transformations-bg-subtle);
+  background: var(--wild-shape-bg-subtle);
 }
 
-.transformations-details-header {
+.wild-shape-details-header {
   cursor: pointer;
   font-weight: bold;
   font-size: 0.75rem;
@@ -412,11 +412,11 @@ a.transformations-branding:hover {
   list-style: none;
 }
 
-.transformations-details-header::-webkit-details-marker {
+.wild-shape-details-header::-webkit-details-marker {
   display: none;
 }
 
-.transformations-details-header::before {
+.wild-shape-details-header::before {
   content: "\f0da";
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
@@ -425,197 +425,20 @@ a.transformations-branding:hover {
   transition: transform 0.15s;
 }
 
-.transformations-advanced[open] > .transformations-details-header::before {
+.wild-shape-advanced[open] > .wild-shape-details-header::before {
   transform: rotate(90deg);
 }
 
-.transformations-details-header i {
+.wild-shape-details-header i {
   margin-right: 0.2rem;
 }
 
-.transformations-advanced-content {
+.wild-shape-advanced-content {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   padding: 0.25rem 0.5rem 0.5rem;
-  border-top: 1px solid var(--transformations-border-light);
+  border-top: 1px solid var(--wild-shape-border-light);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   ELADRIN SEASON DIALOG
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-/* --- Season Grid --- */
-.eladrin-season-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.5rem;
-}
-
-@keyframes eladrin-shimmer {
-  0% { background-position: 200% center; }
-  100% { background-position: -200% center; }
-}
-
-.eladrin-season-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  padding: 1rem 0.75rem;
-  min-height: 4rem;
-  border: 2px solid var(--transformations-border);
-  border-radius: 6px;
-  background:
-    linear-gradient(100deg, transparent 30%, color-mix(in srgb, var(--season-color) 8%, transparent) 50%, transparent 70%),
-    var(--transformations-bg-inset);
-  background-size: 200% 100%, 100% 100%;
-  animation: eladrin-shimmer 4s ease-in-out infinite;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 0.9rem;
-  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
-}
-
-.eladrin-season-btn i {
-  font-size: 1.5rem;
-  color: var(--season-color);
-  transition: transform 0.2s;
-}
-
-.eladrin-season-btn:hover:not(:disabled) {
-  border-color: var(--season-color);
-  box-shadow: 0 0 10px color-mix(in srgb, var(--season-color) 35%, transparent);
-  background:
-    linear-gradient(100deg, transparent 30%, color-mix(in srgb, var(--season-color) 14%, transparent) 50%, transparent 70%),
-    var(--transformations-bg-inset);
-  background-size: 200% 100%, 100% 100%;
-}
-
-.eladrin-season-btn:hover:not(:disabled) i {
-  transform: scale(1.2);
-}
-
-.eladrin-season-btn:active:not(:disabled) {
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-/* Active (current) season */
-.eladrin-season-active {
-  border-color: var(--season-color);
-  background:
-    linear-gradient(100deg, transparent 30%, color-mix(in srgb, var(--season-color) 15%, transparent) 50%, transparent 70%),
-    color-mix(in srgb, var(--season-color) 10%, transparent);
-  background-size: 200% 100%, 100% 100%;
-  box-shadow: 0 0 12px color-mix(in srgb, var(--season-color) 30%, transparent);
-  cursor: default;
-}
-
-.eladrin-season-active i {
-  transform: scale(1.15);
-}
-
-/* --- Current Season Badge --- */
-.eladrin-current-badge {
-  font-weight: bold;
-  font-size: 0.8rem;
-  color: var(--transformations-gold);
-  text-transform: capitalize;
-}
-
-/* --- Configuration Section --- */
-.eladrin-config-content {
-  gap: 0.75rem;
-}
-
-.eladrin-config-row {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  padding: 0.5rem;
-  border: 1px solid var(--transformations-border-light);
-  border-radius: 4px;
-  border-left: 3px solid var(--season-color);
-  background: var(--transformations-bg-faint);
-}
-
-.eladrin-config-label {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.8rem;
-}
-
-.eladrin-config-label i {
-  color: var(--season-color);
-}
-
-/* --- Thumbnail Group --- */
-.eladrin-thumb-group {
-  display: flex;
-  gap: 0.75rem;
-}
-
-.eladrin-thumb {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.15rem;
-}
-
-.eladrin-thumb-label {
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  opacity: 0.6;
-}
-
-.eladrin-thumb img {
-  width: 48px;
-  height: 48px;
-  border: 1px solid var(--transformations-bg-shadow);
-  border-radius: 4px;
-  object-fit: cover;
-}
-
-.eladrin-no-images {
-  font-size: 0.75rem;
-  font-style: italic;
-  opacity: 0.5;
-  padding: 0.25rem 0;
-}
-
-/* --- Save Button --- */
-.eladrin-save-btn {
-  align-self: flex-start;
-  font-size: 0.75rem;
-  padding: 0.25rem 0.5rem;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.eladrin-save-btn i {
-  margin-right: 0.2rem;
-}
-
-/* --- Config Row Buttons --- */
-.eladrin-config-buttons {
-  display: flex;
-  gap: 0.35rem;
-  align-items: center;
-}
-
-.eladrin-delete-btn {
-  font-size: 0.75rem;
-  padding: 0.25rem 0.4rem;
-  cursor: pointer;
-  opacity: 0.4;
-  color: var(--transformations-brand);
-  border-color: var(--transformations-border);
-}
-
-.eladrin-delete-btn:hover {
-  opacity: 1;
-  border-color: var(--transformations-brand);
-}
+/* Eladrin Season functionality migrated to standalone module: gmants-eladrin */

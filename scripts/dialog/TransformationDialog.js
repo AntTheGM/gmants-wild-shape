@@ -7,10 +7,10 @@ const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
 export class TransformationDialog extends HandlebarsApplicationMixin(ApplicationV2) {
   static DEFAULT_OPTIONS = {
-    id: "transformations-dialog",
-    classes: ["transformations"],
+    id: "wild-shape-dialog",
+    classes: ["wild-shape"],
     window: {
-      title: "TRANSFORMATIONS.Dialog.Title",
+      title: "WILDSHAPE.Dialog.Title",
       icon: "fas fa-paw",
       resizable: false,
     },
@@ -148,18 +148,18 @@ export class TransformationDialog extends HandlebarsApplicationMixin(Application
    */
   #bindCardClicks() {
     // Transform form cards
-    for (const card of this.element.querySelectorAll(".transformations-form-card[data-uuid]")) {
+    for (const card of this.element.querySelectorAll(".wild-shape-form-card[data-uuid]")) {
       card.addEventListener("click", async (event) => {
-        if (event.target.closest(".transformations-preview-btn")) return;
+        if (event.target.closest(".wild-shape-preview-btn")) return;
         const uuid = card.dataset.uuid;
         if (uuid) await this.#handleTransform(uuid);
       });
     }
 
     // Onboarding beast entries (click row to preview)
-    for (const entry of this.element.querySelectorAll(".transformations-beast-entry[data-uuid]")) {
+    for (const entry of this.element.querySelectorAll(".wild-shape-beast-entry[data-uuid]")) {
       entry.addEventListener("click", async (event) => {
-        if (event.target.closest(".transformations-beast-check")) return;
+        if (event.target.closest(".wild-shape-beast-check")) return;
         const uuid = entry.dataset.uuid;
         if (!uuid) return;
         await this.#safePreview(uuid);
@@ -167,7 +167,7 @@ export class TransformationDialog extends HandlebarsApplicationMixin(Application
     }
 
     // Onboarding checkboxes (toggle selection)
-    for (const check of this.element.querySelectorAll(".transformations-beast-check")) {
+    for (const check of this.element.querySelectorAll(".wild-shape-beast-check")) {
       check.addEventListener("click", (event) => {
         event.stopPropagation();
         const uuid = check.dataset.uuid;
@@ -176,7 +176,7 @@ export class TransformationDialog extends HandlebarsApplicationMixin(Application
           const rules = getFormRules(this.#getOriginalActor());
           if (this.#selectedFormUuids.size >= (rules?.maxForms ?? 4)) {
             ui.notifications.warn(
-              game.i18n.format("TRANSFORMATIONS.Error.MaxForms", { max: rules.maxForms })
+              game.i18n.format("WILDSHAPE.Error.MaxForms", { max: rules.maxForms })
             );
             check.checked = false;
             return;
@@ -192,9 +192,9 @@ export class TransformationDialog extends HandlebarsApplicationMixin(Application
 
   #injectBranding() {
     const header = this.element.querySelector(".window-header");
-    if (!header || header.querySelector(".transformations-branding")) return;
+    if (!header || header.querySelector(".wild-shape-branding")) return;
     const brand = document.createElement("a");
-    brand.className = "transformations-branding";
+    brand.className = "wild-shape-branding";
     brand.textContent = "VTTools by GM Ant";
     brand.href = "https://roleplayr.com/gmant";
     brand.target = "_blank";
@@ -235,7 +235,7 @@ export class TransformationDialog extends HandlebarsApplicationMixin(Application
     const rules = getFormRules(this.#getOriginalActor());
     if (this.#selectedFormUuids.size >= (rules?.maxForms ?? 4)) {
       ui.notifications.warn(
-        game.i18n.format("TRANSFORMATIONS.Error.MaxForms", { max: rules.maxForms })
+        game.i18n.format("WILDSHAPE.Error.MaxForms", { max: rules.maxForms })
       );
       return;
     }
@@ -295,14 +295,14 @@ export class TransformationDialog extends HandlebarsApplicationMixin(Application
     // Decrement Wild Shape use
     const success = await decrementWildShapeUse(originalActor);
     if (!success) {
-      ui.notifications.warn(game.i18n.localize("TRANSFORMATIONS.Error.NoUses"));
+      ui.notifications.warn(game.i18n.localize("WILDSHAPE.Error.NoUses"));
       return;
     }
 
     // Load the full beast actor from compendium
     const sourceActor = await loadActorFromUuid(uuid);
     if (!sourceActor) {
-      ui.notifications.error(game.i18n.localize("TRANSFORMATIONS.Error.BeastNotFound"));
+      ui.notifications.error(game.i18n.localize("WILDSHAPE.Error.BeastNotFound"));
       return;
     }
 
@@ -351,13 +351,13 @@ export class TransformationDialog extends HandlebarsApplicationMixin(Application
       const actor = await loadActorFromUuid(uuid);
       if (!actor) return;
       if (!actor.testUserPermission(game.user, "LIMITED")) {
-        ui.notifications.info(game.i18n.localize("TRANSFORMATIONS.Error.NoPermission"));
+        ui.notifications.info(game.i18n.localize("WILDSHAPE.Error.NoPermission"));
         return;
       }
       actor.sheet.render(true);
     } catch (err) {
-      console.warn(`5e-transformations | Cannot preview ${uuid}:`, err.message);
-      ui.notifications.info(game.i18n.localize("TRANSFORMATIONS.Error.NoPermission"));
+      console.warn(`gmants-wild-shape | Cannot preview ${uuid}:`, err.message);
+      ui.notifications.info(game.i18n.localize("WILDSHAPE.Error.NoPermission"));
     }
   }
 

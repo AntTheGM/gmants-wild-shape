@@ -1,13 +1,12 @@
 import { MODULE_ID } from "./const.js";
-import { registerSettings, registerEladrinOptIn } from "./settings.js";
+import { registerSettings } from "./settings.js";
 import { canWildShape, getFormRules, formatCR } from "./druid-rules.js";
 import { TransformationDialog } from "./dialog/TransformationDialog.js";
-import { EladrinSeasonDialog } from "./eladrin/eladrin-dialog.js";
-import { isEladrin } from "./eladrin/season-data.js";
-import { registerTeleportHandler } from "./eladrin/teleport.js";
+
+// NOTE: Eladrin Season functionality was migrated to standalone module "gmants-eladrin"
+// (GMAnt's Eladrin) — https://github.com/AntTheGM/gmants-eladrin
 
 let dialogInstance = null;
-let eladrinDialogInstance = null;
 
 // ─── Initialization ──────────────────────────────────────────────────────────
 
@@ -18,8 +17,6 @@ Hooks.once("init", () => {
 
 Hooks.once("ready", () => {
   console.log(`${MODULE_ID} | Ready`);
-  registerEladrinOptIn();
-  registerTeleportHandler();
 });
 
 
@@ -33,21 +30,11 @@ Hooks.on("getSceneControlButtons", (controls) => {
 
   tokenControls.tools.wildShape = {
     name: "wildShape",
-    title: game.i18n.localize("TRANSFORMATIONS.ControlButton"),
+    title: game.i18n.localize("WILDSHAPE.ControlButton"),
     icon: "fa-solid fa-paw",
     onClick: () => openTransformationDialog(),
     button: true,
   };
-
-  if (game.settings.get(MODULE_ID, "showEladrinButton")) {
-    tokenControls.tools.eladrinSeason = {
-      name: "eladrinSeason",
-      title: game.i18n.localize("TRANSFORMATIONS.Eladrin.ControlButton"),
-      icon: "fa-solid fa-leaf",
-      onClick: () => openEladrinDialog(),
-      button: true,
-    };
-  }
 });
 
 // ─── Settings Page Promo ─────────────────────────────────────────────────────
@@ -56,9 +43,9 @@ Hooks.on("renderSettingsConfig", (app, html) => {
   const tab =
     html[0]?.querySelector?.(`.tab[data-tab="${MODULE_ID}"]`) ??
     html.querySelector?.(`.tab[data-tab="${MODULE_ID}"]`);
-  if (!tab || tab.querySelector(".transformations-settings-promo")) return;
+  if (!tab || tab.querySelector(".wild-shape-settings-promo")) return;
   const note = document.createElement("p");
-  note.className = "transformations-settings-promo";
+  note.className = "wild-shape-settings-promo";
   note.style.cssText =
     "text-align:center; font-style:italic; opacity:0.6; font-size:0.8rem; margin-top:0.5rem;";
   note.innerHTML =
@@ -74,14 +61,14 @@ Hooks.on("renderSettingsConfig", (app, html) => {
 function openTransformationDialog() {
   const actor = resolveActor();
   if (!actor) {
-    ui.notifications.warn(game.i18n.localize("TRANSFORMATIONS.Error.NoActor"));
+    ui.notifications.warn(game.i18n.localize("WILDSHAPE.Error.NoActor"));
     return;
   }
 
   // If the actor is polymorphed, we still allow opening (shows transformed view).
   // Only check canWildShape for non-polymorphed actors.
   if (!actor.isPolymorphed && !canWildShape(actor)) {
-    ui.notifications.warn(game.i18n.localize("TRANSFORMATIONS.Error.NotDruid"));
+    ui.notifications.warn(game.i18n.localize("WILDSHAPE.Error.NotDruid"));
     return;
   }
 
@@ -101,40 +88,11 @@ function resolveActor() {
   return canvas.tokens?.controlled?.[0]?.actor ?? game.user?.character ?? null;
 }
 
-// ─── Eladrin Season Dialog ───────────────────────────────────────────────────
-
-/**
- * Open the Eladrin Season Dialog for the currently selected/assigned actor.
- */
-function openEladrinDialog() {
-  const actor = resolveActor();
-  if (!actor) {
-    ui.notifications.warn(game.i18n.localize("TRANSFORMATIONS.Error.NoActor"));
-    return;
-  }
-
-  if (!isEladrin(actor)) {
-    ui.notifications.warn(
-      game.i18n.localize("TRANSFORMATIONS.Error.NotEladrin")
-    );
-    return;
-  }
-
-  if (eladrinDialogInstance) {
-    eladrinDialogInstance.close();
-    eladrinDialogInstance = null;
-  }
-
-  eladrinDialogInstance = new EladrinSeasonDialog(actor);
-  eladrinDialogInstance.render(true);
-}
-
 // ─── Public API ──────────────────────────────────────────────────────────────
 
 // Expose for macros
 Hooks.once("ready", () => {
   game.modules.get(MODULE_ID).api = {
     open: openTransformationDialog,
-    eladrin: openEladrinDialog,
   };
 });

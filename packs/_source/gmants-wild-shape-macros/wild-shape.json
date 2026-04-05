@@ -1,0 +1,26 @@
+{
+  "_id": "trfm5eWldShp0001",
+  "name": "Wild Shape",
+  "type": "script",
+  "author": "SYixMRBTMbFoSMVo",
+  "command": "const mod = game.modules.get('gmants-wild-shape');\nif (!mod?.active) {\n  ui.notifications.error('GMAnt's Wild Shape module is not active.');\n} else {\n  mod.api.open();\n}",
+  "scope": "global",
+  "img": "icons/creatures/mammals/dog-husky-white-blue.webp",
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "13.344",
+    "systemId": "dnd5e",
+    "systemVersion": "5.0.0",
+    "createdTime": 1743465600000,
+    "modifiedTime": 1743465600000,
+    "lastModifiedBy": "SYixMRBTMbFoSMVo"
+  },
+  "_key": "!macros!trfm5eWldShp0001"
+}

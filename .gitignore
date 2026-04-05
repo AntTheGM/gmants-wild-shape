@@ -1,3 +1,10 @@
 node_modules/
 .DS_Store
+Thumbs.db
 *.pdf
+CLAUDE.md
+
+# LevelDB lock/log files (pack data IS tracked)
+packs/**/LOCK
+packs/**/LOG
+packs/**/LOG.old

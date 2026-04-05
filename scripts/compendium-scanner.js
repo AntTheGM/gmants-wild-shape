@@ -16,7 +16,7 @@ export async function scanForBeasts(rules) {
   for (const packId of packIds) {
     const pack = game.packs.get(packId);
     if (!pack) {
-      console.warn(`5e-transformations | Compendium "${packId}" not found`);
+      console.warn(`gmants-wild-shape | Compendium "${packId}" not found`);
       continue;
     }
 
