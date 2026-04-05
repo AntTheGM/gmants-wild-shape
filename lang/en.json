@@ -33,6 +33,9 @@
   "TRANSFORMATIONS.Settings.BeastCompendiums": "Beast Compendiums",
   "TRANSFORMATIONS.Settings.BeastCompendiumsHint": "Comma-separated compendium IDs to scan for beasts (e.g. dnd5e.monsters, world.custom-beasts).",
 
+  "TRANSFORMATIONS.Settings.UseMidiQol": "Enhanced Automation (Fey Step)",
+  "TRANSFORMATIONS.Settings.UseMidiQolHint": "When enabled, season changes rename your existing Fey Step item instead of swapping it, preserving any MIDI QOL automation and effects. Requires: MIDI QOL. Optional: Sequencer + JB2A for teleport animations.",
+
   "TRANSFORMATIONS.Settings.ShowEladrinButton": "Show Eladrin Season Button",
   "TRANSFORMATIONS.Settings.ShowEladrinButtonHint": "Display the Eladrin Season leaf icon in the token controls sidebar. Disable to hide the button (you can still open the dialog via macro).",
 

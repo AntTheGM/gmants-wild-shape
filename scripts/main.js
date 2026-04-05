@@ -4,6 +4,7 @@ import { canWildShape, getFormRules, formatCR } from "./druid-rules.js";
 import { TransformationDialog } from "./dialog/TransformationDialog.js";
 import { EladrinSeasonDialog } from "./eladrin/eladrin-dialog.js";
 import { isEladrin } from "./eladrin/season-data.js";
+import { registerTeleportHandler } from "./eladrin/teleport.js";
 
 let dialogInstance = null;
 let eladrinDialogInstance = null;
@@ -18,7 +19,9 @@ Hooks.once("init", () => {
 Hooks.once("ready", () => {
   console.log(`${MODULE_ID} | Ready`);
   registerEladrinOptIn();
+  registerTeleportHandler();
 });
+
 
 // ─── Scene Control Button ────────────────────────────────────────────────────
 

@@ -38,11 +38,48 @@ export async function getSeasonTrackerItemData(seasonId) {
 
 /**
  * Swap the Fey Step and Eladrin Season items on an actor to match a new season.
- * Preserves Fey Step uses (spent count) across the swap.
+ * In MIDI QOL mode: renames the existing Fey Step item to preserve automation.
+ * In clean mode: replaces items from the module compendium.
  * @param {Actor5e} actor
  * @param {string} newSeasonId
  */
 export async function swapSeasonItems(actor, newSeasonId) {
+  const useMidi = game.settings.get(MODULE_ID, "useMidiQol");
+
+  if (useMidi) {
+    await _swapMidiMode(actor, newSeasonId);
+  } else {
+    await _swapCleanMode(actor, newSeasonId);
+  }
+}
+
+/**
+ * MIDI QOL mode: rename the existing Fey Step to match the new season.
+ * Preserves all activities, effects, and MIDI QOL automation.
+ */
+async function _swapMidiMode(actor, newSeasonId) {
+  const seasonLabel = _capitalize(newSeasonId);
+
+  // Rename existing Fey Step (keep everything else intact)
+  const existingFeyStep = actor.items.find(
+    (i) => /^Fey Step/i.test(i.name) && i.type === "feat"
+  );
+  if (existingFeyStep) {
+    // Preserve the ability modifier suffix if present (e.g., "- Wisdom")
+    const suffixMatch = existingFeyStep.name.match(/\s*-\s*(Wisdom|Intelligence|Charisma)$/i);
+    const suffix = suffixMatch ? ` - ${suffixMatch[1]}` : "";
+    const newName = `Fey Step: ${seasonLabel}${suffix}`;
+    await existingFeyStep.update({ name: newName });
+  }
+
+  // Still swap the Eladrin Season tracker item from compendium
+  await _swapSeasonTracker(actor, newSeasonId);
+}
+
+/**
+ * Clean mode: replace Fey Step and Season tracker from module compendium.
+ */
+async function _swapCleanMode(actor, newSeasonId) {
   const existingFeyStep = actor.items.find(
     (i) => /^Fey Step/i.test(i.name) && i.type === "feat"
   );
@@ -60,7 +97,7 @@ export async function swapSeasonItems(actor, newSeasonId) {
   if (!newFeyStep || !newSeason) {
     console.warn(`${MODULE_ID} | Could not find compendium items for season: ${newSeasonId}`);
     ui.notifications.warn("Could not find season items in compendium. Try reloading the world.");
-    return false;
+    return;
   }
 
   // Carry over spent uses
@@ -80,7 +117,25 @@ export async function swapSeasonItems(actor, newSeasonId) {
 
   // Add new items
   await actor.createEmbeddedDocuments("Item", [newFeyStep, newSeason]);
-  return true;
+}
+
+/**
+ * Swap just the Eladrin Season tracker item (used by both modes).
+ */
+async function _swapSeasonTracker(actor, newSeasonId) {
+  const existingSeason = actor.items.find(
+    (i) => /^Eladrin Season/i.test(i.name) && i.type === "feat"
+  );
+
+  const newSeason = await getSeasonTrackerItemData(newSeasonId);
+  if (!newSeason) return;
+
+  if (existingSeason) {
+    await actor.deleteEmbeddedDocuments("Item", [existingSeason.id]);
+  }
+
+  delete newSeason._id;
+  await actor.createEmbeddedDocuments("Item", [newSeason]);
 }
 
 function _capitalize(str) {

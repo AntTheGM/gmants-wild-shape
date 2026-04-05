@@ -29,6 +29,15 @@ export function registerSettings() {
 
   // --- Eladrin Settings ---
 
+  game.settings.register(MODULE_ID, "useMidiQol", {
+    name: "TRANSFORMATIONS.Settings.UseMidiQol",
+    hint: "TRANSFORMATIONS.Settings.UseMidiQolHint",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: false,
+  });
+
   game.settings.register(MODULE_ID, "showEladrinButton", {
     name: "TRANSFORMATIONS.Settings.ShowEladrinButton",
     hint: "TRANSFORMATIONS.Settings.ShowEladrinButtonHint",

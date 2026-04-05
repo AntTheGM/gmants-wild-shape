@@ -31,6 +31,23 @@
           "minimum": "5.0.0"
         }
       }
+    ],
+    "optional": [
+      {
+        "id": "midi-qol",
+        "type": "module",
+        "reason": "Enables automated Fey Step saves, damage rolls, and condition application"
+      },
+      {
+        "id": "sequencer",
+        "type": "module",
+        "reason": "Enables teleport visual effects (Fey Step departure/arrival animations)"
+      },
+      {
+        "id": "JB2A_DnD5e",
+        "type": "module",
+        "reason": "Provides animated assets for Fey Step teleport effects (free or patreon)"
+      }
     ]
   },
   "packs": [
