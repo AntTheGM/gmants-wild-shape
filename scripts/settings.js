@@ -20,6 +20,25 @@ export function registerSettings() {
     requiresReload: true,
   });
 
+  game.settings.register(MODULE_ID, "tempHpMultiplier", {
+    name: "WILDSHAPE.Settings.TempHpMultiplier",
+    hint: "WILDSHAPE.Settings.TempHpMultiplierHint",
+    scope: "world",
+    config: true,
+    type: Number,
+    default: 1,
+    range: { min: 0, max: 10, step: 1 },
+  });
+
+  game.settings.register(MODULE_ID, "tempHpPersist", {
+    name: "WILDSHAPE.Settings.TempHpPersist",
+    hint: "WILDSHAPE.Settings.TempHpPersistHint",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: true,
+  });
+
   game.settings.register(MODULE_ID, "dialogPosition", {
     scope: "client",
     config: false,

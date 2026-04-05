@@ -2,7 +2,7 @@
 # Deploy GMAnt's Wild Shape to live Foundry modules directory
 # Usage: bash deploy.sh
 
-SRC="R:/Foundry/Modules/5e_Transformations"
+SRC="R:/Foundry/Modules/GMAnt_Wild_Shape"
 DEST="R:/Foundry/Data/modules/gmants-wild-shape"
 
 mkdir -p "$DEST"

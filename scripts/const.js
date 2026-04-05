@@ -2,6 +2,8 @@ export const MODULE_ID = "gmants-wild-shape";
 
 export const FLAGS = {
   KNOWN_FORMS: "knownForms",
+  PRE_TRANSFORM_TEMP_HP: "preTransformTempHp",
+  WILD_SHAPE_TEMP_HP: "wildShapeTempHp",
 };
 
 /**

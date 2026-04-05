@@ -30,6 +30,17 @@
   "WILDSHAPE.Settings.ShowControlButton": "Show Sidebar Button",
   "WILDSHAPE.Settings.ShowControlButtonHint": "Display the Wild Shape paw icon in the token controls sidebar. Disable to hide the button (you can still open the dialog via macro).",
 
+  "WILDSHAPE.Settings.TempHpMultiplier": "Wild Shape Temp HP Multiplier",
+  "WILDSHAPE.Settings.TempHpMultiplierHint": "Temporary HP granted on Wild Shape = druid level \u00d7 this number. RAW is 1.",
+
+  "WILDSHAPE.Settings.TempHpPersist": "Temp HP Persist After Wild Shape",
+  "WILDSHAPE.Settings.TempHpPersistHint": "When checked, temp HP gained by Wild Shape persist after reverting. When unchecked, temp HP gained by Wild Shape are removed when reverting.",
+
   "WILDSHAPE.Settings.BeastCompendiums": "Beast Compendiums",
-  "WILDSHAPE.Settings.BeastCompendiumsHint": "Comma-separated compendium IDs to scan for beasts (e.g. dnd5e.monsters, world.custom-beasts)."
+  "WILDSHAPE.Settings.BeastCompendiumsHint": "Comma-separated compendium IDs to scan for beasts (e.g. dnd5e.monsters, world.custom-beasts).",
+
+  "WILDSHAPE.Config.Title": "Options",
+  "WILDSHAPE.Config.NoConsume": "Do not consume resource",
+  "WILDSHAPE.Config.TempHpPersist": "Temporary HP persist after Wild Shape ends",
+  "WILDSHAPE.Config.EditForms": "Change known forms"
 }

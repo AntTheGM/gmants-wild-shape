@@ -1,5 +1,5 @@
 import { MODULE_ID, FLAGS } from "../const.js";
-import { canWildShape, getFormRules, formatCR } from "../druid-rules.js";
+import { canWildShape, getDruidLevel, getFormRules, formatCR } from "../druid-rules.js";
 import { scanForBeasts, loadActorFromUuid } from "../compendium-scanner.js";
 import { getWildShapeUses, decrementWildShapeUse } from "../resource-tracker.js";
 
@@ -139,6 +139,7 @@ export class TransformationDialog extends HandlebarsApplicationMixin(Application
     this.#injectBranding();
     this.#restorePosition();
     this.#bindCardClicks();
+    this.#wireConfig();
   }
 
   /**
@@ -186,6 +187,34 @@ export class TransformationDialog extends HandlebarsApplicationMixin(Application
           this.#selectedFormUuids.delete(uuid);
         }
         this.render();
+      });
+    }
+  }
+
+  /**
+   * Wire the config towel — resize on toggle, noConsume enables/disables cards.
+   */
+  #wireConfig() {
+    const config = this.element.querySelector(".wild-shape-config");
+    if (config) {
+      config.addEventListener("toggle", () => {
+        this.setPosition({ height: "auto" });
+      });
+    }
+
+    const noConsumeCb = this.element.querySelector('[name="noConsume"]');
+    if (noConsumeCb) {
+      noConsumeCb.addEventListener("change", () => {
+        const cards = this.element.querySelectorAll(".wild-shape-form-card");
+        for (const card of cards) {
+          if (noConsumeCb.checked) {
+            card.classList.remove("wild-shape-disabled");
+          } else {
+            // Re-check actual uses to decide disabled state
+            const uses = getWildShapeUses(this.#getOriginalActor());
+            if (!uses || uses.current <= 0) card.classList.add("wild-shape-disabled");
+          }
+        }
       });
     }
   }
@@ -292,11 +321,14 @@ export class TransformationDialog extends HandlebarsApplicationMixin(Application
   async #handleTransform(uuid) {
     const originalActor = this.#getOriginalActor();
 
-    // Decrement Wild Shape use
-    const success = await decrementWildShapeUse(originalActor);
-    if (!success) {
-      ui.notifications.warn(game.i18n.localize("WILDSHAPE.Error.NoUses"));
-      return;
+    // Decrement Wild Shape use (unless "no consume" is checked)
+    const noConsume = this.element.querySelector('[name="noConsume"]')?.checked;
+    if (!noConsume) {
+      const success = await decrementWildShapeUse(originalActor);
+      if (!success) {
+        ui.notifications.warn(game.i18n.localize("WILDSHAPE.Error.NoUses"));
+        return;
+      }
     }
 
     // Load the full beast actor from compendium
@@ -320,8 +352,26 @@ export class TransformationDialog extends HandlebarsApplicationMixin(Application
       });
     }
 
+    // Calculate Wild Shape temp HP grant: druid level × multiplier
+    const druidLevel = getDruidLevel(originalActor);
+    const multiplier = game.settings.get(MODULE_ID, "tempHpMultiplier") ?? 1;
+    const wildShapeTempHp = druidLevel * multiplier;
+
+    // Capture current temp HP before transformation replaces it
+    const originalTempHp = this.#actor.system.attributes.hp.temp ?? 0;
+
+    // Intercept the transform data before the new actor is created — this is
+    // far more reliable than trying to find the actor after the fact.
+    Hooks.once("dnd5e.transformActor", (host, source, d) => {
+      const beastTempHp = d.system.attributes.hp?.temp ?? 0;
+      d.system.attributes.hp.temp = Math.max(originalTempHp, wildShapeTempHp, beastTempHp);
+      foundry.utils.setProperty(d, `flags.${MODULE_ID}.${FLAGS.PRE_TRANSFORM_TEMP_HP}`, originalTempHp);
+      foundry.utils.setProperty(d, `flags.${MODULE_ID}.${FLAGS.WILD_SHAPE_TEMP_HP}`, wildShapeTempHp);
+    });
+
     // Perform transformation
     await this.#actor.transformInto(sourceActor, settings);
+
     await this.close();
   }
 
@@ -329,7 +379,33 @@ export class TransformationDialog extends HandlebarsApplicationMixin(Application
    * Revert to original form.
    */
   static async #onRevert() {
+    const beastTempHp = this.#actor.system.attributes.hp.temp ?? 0;
+    const wildShapeTempHp = this.#actor.getFlag(MODULE_ID, FLAGS.WILD_SHAPE_TEMP_HP) ?? 0;
+    const preTransformTempHp = this.#actor.getFlag(MODULE_ID, FLAGS.PRE_TRANSFORM_TEMP_HP) ?? 0;
+    const persist = game.settings.get(MODULE_ID, "tempHpPersist");
+    const original = game.actors.get(this.#actor.getFlag("dnd5e", "originalActor"));
+
     await this.#actor.revertOriginalForm({ renderSheet: true });
+
+    // Calculate what temp HP the reverted actor should have.
+    // Persist ON:  beast form's current temp HP carries over fully.
+    // Persist OFF: subtract only the temp HP that wild shape actually added
+    //   (if you already had more temp HP than wild shape grants, it added nothing).
+    let revertedTempHp;
+    if (persist) {
+      revertedTempHp = beastTempHp;
+    } else {
+      const actualGain = Math.max(0, wildShapeTempHp - preTransformTempHp);
+      revertedTempHp = Math.max(0, beastTempHp - actualGain);
+    }
+
+    if (original) {
+      const postRevertTempHp = original.system.attributes.hp.temp ?? 0;
+      if (postRevertTempHp !== revertedTempHp) {
+        await original.update({ "system.attributes.hp.temp": revertedTempHp });
+      }
+    }
+
     await this.close();
   }
 

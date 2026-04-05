@@ -76,7 +76,7 @@
     <div class="wild-shape-form-grid">
       {{#each knownForms}}
         <div class="wild-shape-form-card {{#unless ../hasUses}}wild-shape-disabled{{/unless}}"
-             {{#if ../hasUses}}data-action="transform"{{/if}}
+             data-action="transform"
              data-uuid="{{uuid}}">
           <img src="{{img}}" class="wild-shape-form-img" alt="{{name}}" />
           <div class="wild-shape-form-label">
@@ -90,10 +90,6 @@
         </div>
       {{/each}}
     </div>
-
-    <button type="button" class="wild-shape-secondary-btn" data-action="editForms">
-      <i class="fas fa-pen"></i> {{localize "WILDSHAPE.Transform.EditForms"}}
-    </button>
 
   {{!-- ═══════════════════════════════════════════════════════════════════ --}}
   {{!-- TRANSFORMED VIEW                                                   --}}
@@ -138,4 +134,22 @@
     {{/if}}
 
   {{/if}}
+
+  {{!-- ═══════════════════════════════════════════════════════════════════ --}}
+  {{!-- CONFIG TOWEL (transform + transformed views)                       --}}
+  {{!-- ═══════════════════════════════════════════════════════════════════ --}}
+  {{#unless (eq viewState "onboarding")}}
+    <details class="wild-shape-config">
+      <summary><i class="fas fa-cog"></i> {{localize "WILDSHAPE.Config.Title"}}</summary>
+      <div class="wild-shape-config-content">
+        <label class="wild-shape-checkbox">
+          <input type="checkbox" name="noConsume" />
+          {{localize "WILDSHAPE.Config.NoConsume"}}
+        </label>
+        <button type="button" class="wild-shape-secondary-btn wild-shape-config-btn" data-action="editForms">
+          <i class="fas fa-pen"></i> {{localize "WILDSHAPE.Config.EditForms"}}
+        </button>
+      </div>
+    </details>
+  {{/unless}}
 </form>
