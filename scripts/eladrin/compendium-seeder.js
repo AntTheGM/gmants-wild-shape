@@ -116,15 +116,16 @@ async function _swapMidiMode(actor, newSeasonId) {
  * Clean mode: replace Fey Step and Season tracker from module compendium.
  */
 async function _swapCleanMode(actor, newSeasonId) {
-  const existingFeyStep = actor.items.find(
+  // Find ALL old Fey Step and season tracker items (exclude "All Seasons" reference)
+  const oldFeySteps = actor.items.filter(
     (i) => /^Fey Step/i.test(i.name) && i.type === "feat"
   );
-  const existingSeason = actor.items.find(
-    (i) => /^Eladrin Season/i.test(i.name) && i.type === "feat"
+  const oldSeasons = actor.items.filter(
+    (i) => /^Eladrin Season/i.test(i.name) && i.type === "feat" && !i.name.includes("All Seasons")
   );
 
-  // Preserve Fey Step uses
-  const spentUses = existingFeyStep?.system?.uses?.spent ?? 0;
+  // Preserve Fey Step uses from the first match
+  const spentUses = oldFeySteps[0]?.system?.uses?.spent ?? 0;
 
   // Get new items from compendium
   const newFeyStep = await getFeyStepItemData(newSeasonId);
@@ -139,10 +140,11 @@ async function _swapCleanMode(actor, newSeasonId) {
   // Carry over spent uses
   newFeyStep.system.uses.spent = spentUses;
 
-  // Remove old items
-  const toDelete = [];
-  if (existingFeyStep) toDelete.push(existingFeyStep.id);
-  if (existingSeason) toDelete.push(existingSeason.id);
+  // Remove ALL old items
+  const toDelete = [
+    ...oldFeySteps.map((i) => i.id),
+    ...oldSeasons.map((i) => i.id),
+  ];
   if (toDelete.length > 0) {
     await actor.deleteEmbeddedDocuments("Item", toDelete);
   }
@@ -159,15 +161,16 @@ async function _swapCleanMode(actor, newSeasonId) {
  * Swap just the Eladrin Season tracker item (used by both modes).
  */
 async function _swapSeasonTracker(actor, newSeasonId) {
-  const existingSeason = actor.items.find(
-    (i) => /^Eladrin Season/i.test(i.name) && i.type === "feat"
+  // Find ALL old season trackers (exclude "All Seasons" reference)
+  const oldSeasons = actor.items.filter(
+    (i) => /^Eladrin Season/i.test(i.name) && i.type === "feat" && !i.name.includes("All Seasons")
   );
 
   const newSeason = await getSeasonTrackerItemData(newSeasonId);
   if (!newSeason) return;
 
-  if (existingSeason) {
-    await actor.deleteEmbeddedDocuments("Item", [existingSeason.id]);
+  if (oldSeasons.length > 0) {
+    await actor.deleteEmbeddedDocuments("Item", oldSeasons.map((i) => i.id));
   }
 
   delete newSeason._id;
