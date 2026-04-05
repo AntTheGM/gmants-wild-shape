@@ -1,5 +1,5 @@
 import { MODULE_ID } from "./const.js";
-import { registerSettings } from "./settings.js";
+import { registerSettings, registerEladrinOptIn } from "./settings.js";
 import { canWildShape, getFormRules, formatCR } from "./druid-rules.js";
 import { TransformationDialog } from "./dialog/TransformationDialog.js";
 import { EladrinSeasonDialog } from "./eladrin/eladrin-dialog.js";
@@ -17,6 +17,7 @@ Hooks.once("init", () => {
 
 Hooks.once("ready", () => {
   console.log(`${MODULE_ID} | Ready`);
+  registerEladrinOptIn();
 });
 
 // ─── Scene Control Button ────────────────────────────────────────────────────
