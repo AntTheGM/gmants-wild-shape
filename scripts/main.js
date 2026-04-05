@@ -2,8 +2,11 @@ import { MODULE_ID } from "./const.js";
 import { registerSettings } from "./settings.js";
 import { canWildShape, getFormRules, formatCR } from "./druid-rules.js";
 import { TransformationDialog } from "./dialog/TransformationDialog.js";
+import { EladrinSeasonDialog } from "./eladrin/eladrin-dialog.js";
+import { isEladrin } from "./eladrin/season-data.js";
 
 let dialogInstance = null;
+let eladrinDialogInstance = null;
 
 // ─── Initialization ──────────────────────────────────────────────────────────
 
@@ -19,6 +22,8 @@ Hooks.once("ready", () => {
 // ─── Scene Control Button ────────────────────────────────────────────────────
 
 Hooks.on("getSceneControlButtons", (controls) => {
+  if (!game.settings.get(MODULE_ID, "showControlButton")) return;
+
   const tokenControls = controls.tokens;
   if (!tokenControls) return;
 
@@ -29,6 +34,16 @@ Hooks.on("getSceneControlButtons", (controls) => {
     onClick: () => openTransformationDialog(),
     button: true,
   };
+
+  if (game.settings.get(MODULE_ID, "showEladrinButton")) {
+    tokenControls.tools.eladrinSeason = {
+      name: "eladrinSeason",
+      title: game.i18n.localize("TRANSFORMATIONS.Eladrin.ControlButton"),
+      icon: "fa-solid fa-leaf",
+      onClick: () => openEladrinDialog(),
+      button: true,
+    };
+  }
 });
 
 // ─── Settings Page Promo ─────────────────────────────────────────────────────
@@ -82,9 +97,40 @@ function resolveActor() {
   return canvas.tokens?.controlled?.[0]?.actor ?? game.user?.character ?? null;
 }
 
+// ─── Eladrin Season Dialog ───────────────────────────────────────────────────
+
+/**
+ * Open the Eladrin Season Dialog for the currently selected/assigned actor.
+ */
+function openEladrinDialog() {
+  const actor = resolveActor();
+  if (!actor) {
+    ui.notifications.warn(game.i18n.localize("TRANSFORMATIONS.Error.NoActor"));
+    return;
+  }
+
+  if (!isEladrin(actor)) {
+    ui.notifications.warn(
+      game.i18n.localize("TRANSFORMATIONS.Error.NotEladrin")
+    );
+    return;
+  }
+
+  if (eladrinDialogInstance) {
+    eladrinDialogInstance.close();
+    eladrinDialogInstance = null;
+  }
+
+  eladrinDialogInstance = new EladrinSeasonDialog(actor);
+  eladrinDialogInstance.render(true);
+}
+
+// ─── Public API ──────────────────────────────────────────────────────────────
+
 // Expose for macros
 Hooks.once("ready", () => {
   game.modules.get(MODULE_ID).api = {
     open: openTransformationDialog,
+    eladrin: openEladrinDialog,
   };
 });

@@ -440,3 +440,161 @@ a.transformations-branding:hover {
   padding: 0.25rem 0.5rem 0.5rem;
   border-top: 1px solid var(--transformations-border-light);
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ELADRIN SEASON DIALOG
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* --- Season Grid --- */
+.eladrin-season-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+@keyframes eladrin-shimmer {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+.eladrin-season-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 1rem 0.75rem;
+  min-height: 4rem;
+  border: 2px solid var(--transformations-border);
+  border-radius: 6px;
+  background:
+    linear-gradient(100deg, transparent 30%, color-mix(in srgb, var(--season-color) 8%, transparent) 50%, transparent 70%),
+    var(--transformations-bg-inset);
+  background-size: 200% 100%, 100% 100%;
+  animation: eladrin-shimmer 4s ease-in-out infinite;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+
+.eladrin-season-btn i {
+  font-size: 1.5rem;
+  color: var(--season-color);
+  transition: transform 0.2s;
+}
+
+.eladrin-season-btn:hover:not(:disabled) {
+  border-color: var(--season-color);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--season-color) 35%, transparent);
+  background:
+    linear-gradient(100deg, transparent 30%, color-mix(in srgb, var(--season-color) 14%, transparent) 50%, transparent 70%),
+    var(--transformations-bg-inset);
+  background-size: 200% 100%, 100% 100%;
+}
+
+.eladrin-season-btn:hover:not(:disabled) i {
+  transform: scale(1.2);
+}
+
+.eladrin-season-btn:active:not(:disabled) {
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Active (current) season */
+.eladrin-season-active {
+  border-color: var(--season-color);
+  background:
+    linear-gradient(100deg, transparent 30%, color-mix(in srgb, var(--season-color) 15%, transparent) 50%, transparent 70%),
+    color-mix(in srgb, var(--season-color) 10%, transparent);
+  background-size: 200% 100%, 100% 100%;
+  box-shadow: 0 0 12px color-mix(in srgb, var(--season-color) 30%, transparent);
+  cursor: default;
+}
+
+.eladrin-season-active i {
+  transform: scale(1.15);
+}
+
+/* --- Current Season Badge --- */
+.eladrin-current-badge {
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: var(--transformations-gold);
+  text-transform: capitalize;
+}
+
+/* --- Configuration Section --- */
+.eladrin-config-content {
+  gap: 0.75rem;
+}
+
+.eladrin-config-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.5rem;
+  border: 1px solid var(--transformations-border-light);
+  border-radius: 4px;
+  border-left: 3px solid var(--season-color);
+  background: var(--transformations-bg-faint);
+}
+
+.eladrin-config-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+}
+
+.eladrin-config-label i {
+  color: var(--season-color);
+}
+
+/* --- Thumbnail Group --- */
+.eladrin-thumb-group {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.eladrin-thumb {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.eladrin-thumb-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  opacity: 0.6;
+}
+
+.eladrin-thumb img {
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--transformations-bg-shadow);
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.eladrin-no-images {
+  font-size: 0.75rem;
+  font-style: italic;
+  opacity: 0.5;
+  padding: 0.25rem 0;
+}
+
+/* --- Save Button --- */
+.eladrin-save-btn {
+  align-self: flex-start;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.eladrin-save-btn i {
+  margin-right: 0.2rem;
+}

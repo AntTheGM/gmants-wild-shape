@@ -1,0 +1,63 @@
+{
+  "_id": "trfmFeyStepAutmn1",
+  "name": "Fey Step: Autumn",
+  "type": "feat",
+  "img": "icons/magic/nature/leaf-glow-triple-orange.webp",
+  "effects": [],
+  "system": {
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "max": "@prof",
+      "recovery": [
+        {
+          "period": "lr",
+          "type": "recoverAll"
+        }
+      ]
+    },
+    "advancement": [],
+    "description": {
+      "value": "<p>As a bonus action, you can magically teleport up to 30 feet to an unoccupied space you can see. You can use this trait a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.</p><p><strong>Autumn.</strong> Immediately after you use your Fey Step, up to two creatures of your choice that you can see within 10 feet of you must succeed on a Wisdom saving throw (DC = 8 + your proficiency bonus + your Intelligence, Wisdom, or Charisma modifier) or be charmed by you for 1 minute, or until you or your companions deal any damage to the creatures.</p>",
+      "chat": ""
+    },
+    "identifier": "fey-step",
+    "source": {
+      "book": "MotM",
+      "page": "",
+      "license": "",
+      "custom": "",
+      "rules": "2014",
+      "revision": 1
+    },
+    "crewed": false,
+    "enchant": {},
+    "prerequisites": {
+      "items": [],
+      "repeatable": false
+    },
+    "properties": [],
+    "requirements": "",
+    "type": {
+      "value": "race",
+      "subtype": ""
+    }
+  },
+  "flags": {},
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "13.344",
+    "systemId": "dnd5e",
+    "systemVersion": "5.0.0",
+    "createdTime": 1743465600000,
+    "modifiedTime": 1743465600000,
+    "lastModifiedBy": "SYixMRBTMbFoSMVo"
+  },
+  "_key": "!items!trfmFeyStepAutmn1"
+}

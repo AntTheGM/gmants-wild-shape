@@ -1,0 +1,57 @@
+{
+  "_id": "trfmSeasonSprng01",
+  "name": "Eladrin Season: Spring",
+  "type": "feat",
+  "img": "icons/magic/nature/leaf-glow-triple-green.webp",
+  "effects": [],
+  "system": {
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "recovery": []
+    },
+    "advancement": [],
+    "description": {
+      "value": "<p>Your current Eladrin season is <strong>Spring</strong>.</p><p>Cheerfulness and celebration, marked by merriment and hope as winter's sorrow passes.</p>",
+      "chat": ""
+    },
+    "identifier": "eladrin-season",
+    "source": {
+      "book": "MotM",
+      "page": "",
+      "license": "",
+      "custom": "",
+      "rules": "2014",
+      "revision": 1
+    },
+    "crewed": false,
+    "enchant": {},
+    "prerequisites": {
+      "items": [],
+      "repeatable": false
+    },
+    "properties": [],
+    "requirements": "",
+    "type": {
+      "value": "race",
+      "subtype": ""
+    }
+  },
+  "flags": {},
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "13.344",
+    "systemId": "dnd5e",
+    "systemVersion": "5.0.0",
+    "createdTime": 1743465600000,
+    "modifiedTime": 1743465600000,
+    "lastModifiedBy": "SYixMRBTMbFoSMVo"
+  },
+  "_key": "!items!trfmSeasonSprng01"
+}

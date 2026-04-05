@@ -10,7 +10,36 @@ export function registerSettings() {
     default: "dnd5e.monsters",
   });
 
+  game.settings.register(MODULE_ID, "showControlButton", {
+    name: "TRANSFORMATIONS.Settings.ShowControlButton",
+    hint: "TRANSFORMATIONS.Settings.ShowControlButtonHint",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: true,
+    requiresReload: true,
+  });
+
   game.settings.register(MODULE_ID, "dialogPosition", {
+    scope: "client",
+    config: false,
+    default: {},
+    type: Object,
+  });
+
+  // --- Eladrin Settings ---
+
+  game.settings.register(MODULE_ID, "showEladrinButton", {
+    name: "TRANSFORMATIONS.Settings.ShowEladrinButton",
+    hint: "TRANSFORMATIONS.Settings.ShowEladrinButtonHint",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: true,
+    requiresReload: true,
+  });
+
+  game.settings.register(MODULE_ID, "eladrinDialogPosition", {
     scope: "client",
     config: false,
     default: {},

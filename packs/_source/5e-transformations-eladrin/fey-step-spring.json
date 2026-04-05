@@ -1,0 +1,63 @@
+{
+  "_id": "trfmFeyStepSprng1",
+  "name": "Fey Step: Spring",
+  "type": "feat",
+  "img": "icons/magic/nature/leaf-glow-triple-green.webp",
+  "effects": [],
+  "system": {
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "max": "@prof",
+      "recovery": [
+        {
+          "period": "lr",
+          "type": "recoverAll"
+        }
+      ]
+    },
+    "advancement": [],
+    "description": {
+      "value": "<p>As a bonus action, you can magically teleport up to 30 feet to an unoccupied space you can see. You can use this trait a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.</p><p><strong>Spring.</strong> When you use your Fey Step, you can touch one willing creature within 5 feet of you. That creature then teleports instead of you, appearing in an unoccupied space of your choice that you can see within 30 feet of you.</p>",
+      "chat": ""
+    },
+    "identifier": "fey-step",
+    "source": {
+      "book": "MotM",
+      "page": "",
+      "license": "",
+      "custom": "",
+      "rules": "2014",
+      "revision": 1
+    },
+    "crewed": false,
+    "enchant": {},
+    "prerequisites": {
+      "items": [],
+      "repeatable": false
+    },
+    "properties": [],
+    "requirements": "",
+    "type": {
+      "value": "race",
+      "subtype": ""
+    }
+  },
+  "flags": {},
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "13.344",
+    "systemId": "dnd5e",
+    "systemVersion": "5.0.0",
+    "createdTime": 1743465600000,
+    "modifiedTime": 1743465600000,
+    "lastModifiedBy": "SYixMRBTMbFoSMVo"
+  },
+  "_key": "!items!trfmFeyStepSprng1"
+}

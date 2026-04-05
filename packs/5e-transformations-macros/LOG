@@ -1,1 +1,5 @@
-2026/04/01-09:49:03.851 3ce0 Delete type=3 #1
+2026/04/04-20:38:01.522 56a4 Delete type=3 #1
+2026/04/04-20:38:01.536 6de4 Level-0 table #5: started
+2026/04/04-20:38:01.549 6de4 Level-0 table #5: 842 bytes OK
+2026/04/04-20:38:01.552 6de4 Delete type=0 #3
+2026/04/04-20:38:01.556 6de4 Manual compaction at level-0 from '!macros!trfm5eChgSeason1' @ 72057594037927935 : 1 .. '!macros!trfm5eWldShp0001' @ 0 : 0; will stop at (end)

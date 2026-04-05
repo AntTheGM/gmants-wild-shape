@@ -162,8 +162,7 @@ export class TransformationDialog extends HandlebarsApplicationMixin(Application
         if (event.target.closest(".transformations-beast-check")) return;
         const uuid = entry.dataset.uuid;
         if (!uuid) return;
-        const actor = await loadActorFromUuid(uuid);
-        if (actor) actor.sheet.render(true);
+        await this.#safePreview(uuid);
       });
     }
 
@@ -341,8 +340,25 @@ export class TransformationDialog extends HandlebarsApplicationMixin(Application
     event.stopPropagation();
     const uuid = target.closest("[data-uuid]")?.dataset.uuid;
     if (!uuid) return;
-    const actor = await loadActorFromUuid(uuid);
-    if (actor) actor.sheet.render(true);
+    await this.#safePreview(uuid);
+  }
+
+  /**
+   * Safely preview a compendium actor, handling permission errors gracefully.
+   */
+  async #safePreview(uuid) {
+    try {
+      const actor = await loadActorFromUuid(uuid);
+      if (!actor) return;
+      if (!actor.testUserPermission(game.user, "LIMITED")) {
+        ui.notifications.info(game.i18n.localize("TRANSFORMATIONS.Error.NoPermission"));
+        return;
+      }
+      actor.sheet.render(true);
+    } catch (err) {
+      console.warn(`5e-transformations | Cannot preview ${uuid}:`, err.message);
+      ui.notifications.info(game.i18n.localize("TRANSFORMATIONS.Error.NoPermission"));
+    }
   }
 
   /**

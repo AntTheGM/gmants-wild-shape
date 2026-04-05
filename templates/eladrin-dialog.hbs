@@ -1,0 +1,79 @@
+<form class="transformations-form eladrin-form">
+
+  {{!-- ═══════════════════════════════════════════════════════════════════ --}}
+  {{!-- SEASON BUTTONS                                                     --}}
+  {{!-- ═══════════════════════════════════════════════════════════════════ --}}
+
+  <div class="eladrin-section">
+    <div class="transformations-section-header">
+      <label>{{localize "TRANSFORMATIONS.Eladrin.CurrentSeason"}}</label>
+      {{#if currentSeason}}
+        <span class="eladrin-current-badge">
+          {{localize (concat "TRANSFORMATIONS.Eladrin.Season." currentSeason)}}
+        </span>
+      {{/if}}
+    </div>
+
+    {{#unless currentSeason}}
+      <p class="transformations-hint">{{localize "TRANSFORMATIONS.Eladrin.NoSeason"}}</p>
+    {{/unless}}
+  </div>
+
+  <div class="eladrin-season-grid">
+    {{#each seasons}}
+      <button type="button"
+              class="eladrin-season-btn {{#if isCurrent}}eladrin-season-active{{/if}}"
+              data-action="changeSeason"
+              data-season="{{id}}"
+              style="--season-color: {{color}}"
+              {{#if isCurrent}}disabled{{/if}}>
+        <i class="{{icon}}"></i>
+        <span>{{label}}</span>
+      </button>
+    {{/each}}
+  </div>
+
+  {{!-- ═══════════════════════════════════════════════════════════════════ --}}
+  {{!-- SEASON CONFIGURATION (collapsible)                                 --}}
+  {{!-- ═══════════════════════════════════════════════════════════════════ --}}
+
+  <details class="transformations-advanced eladrin-config">
+    <summary class="transformations-details-header">
+      <i class="fas fa-cog"></i> {{localize "TRANSFORMATIONS.Eladrin.ConfigHeader"}}
+    </summary>
+    <div class="transformations-advanced-content eladrin-config-content">
+      {{#each seasons}}
+        <div class="eladrin-config-row" style="--season-color: {{color}}">
+          <div class="eladrin-config-label">
+            <i class="{{icon}}"></i>
+            <strong>{{label}}</strong>
+          </div>
+          <div class="eladrin-config-images">
+            {{#if hasImages}}
+              <div class="eladrin-thumb-group">
+                {{#if images.token}}
+                  <div class="eladrin-thumb">
+                    <span class="eladrin-thumb-label">{{localize "TRANSFORMATIONS.Eladrin.Token"}}</span>
+                    <img src="{{images.token}}" alt="{{label}} token" />
+                  </div>
+                {{/if}}
+                {{#if images.portrait}}
+                  <div class="eladrin-thumb">
+                    <span class="eladrin-thumb-label">{{localize "TRANSFORMATIONS.Eladrin.Portrait"}}</span>
+                    <img src="{{images.portrait}}" alt="{{label}} portrait" />
+                  </div>
+                {{/if}}
+              </div>
+            {{else}}
+              <span class="eladrin-no-images">{{localize "TRANSFORMATIONS.Eladrin.NoImages"}}</span>
+            {{/if}}
+          </div>
+          <button type="button" class="eladrin-save-btn" data-action="saveSeason" data-season="{{id}}">
+            <i class="fas fa-camera"></i> Save Current
+          </button>
+        </div>
+      {{/each}}
+    </div>
+  </details>
+
+</form>

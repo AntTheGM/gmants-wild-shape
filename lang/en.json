@@ -25,7 +25,36 @@
   "TRANSFORMATIONS.Error.NoCompendiums": "No beast compendiums configured. Ask your GM to set them in Module Settings → 5e Transformations.",
   "TRANSFORMATIONS.Error.BeastNotFound": "Could not load the beast actor from the compendium.",
   "TRANSFORMATIONS.Error.MaxForms": "You can only select up to {max} forms.",
+  "TRANSFORMATIONS.Error.NoPermission": "You don\u0027t have permission to view this creature\u0027s sheet. Ask your GM to adjust compendium permissions.",
+
+  "TRANSFORMATIONS.Settings.ShowControlButton": "Show Sidebar Button",
+  "TRANSFORMATIONS.Settings.ShowControlButtonHint": "Display the Wild Shape paw icon in the token controls sidebar. Disable to hide the button (you can still open the dialog via macro).",
 
   "TRANSFORMATIONS.Settings.BeastCompendiums": "Beast Compendiums",
-  "TRANSFORMATIONS.Settings.BeastCompendiumsHint": "Comma-separated compendium IDs to scan for beasts (e.g. dnd5e.monsters, world.custom-beasts)."
+  "TRANSFORMATIONS.Settings.BeastCompendiumsHint": "Comma-separated compendium IDs to scan for beasts (e.g. dnd5e.monsters, world.custom-beasts).",
+
+  "TRANSFORMATIONS.Settings.ShowEladrinButton": "Show Eladrin Season Button",
+  "TRANSFORMATIONS.Settings.ShowEladrinButtonHint": "Display the Eladrin Season leaf icon in the token controls sidebar. Disable to hide the button (you can still open the dialog via macro).",
+
+  "TRANSFORMATIONS.Eladrin.DialogTitle": "Eladrin Season",
+  "TRANSFORMATIONS.Eladrin.ControlButton": "Eladrin Season",
+  "TRANSFORMATIONS.Eladrin.CurrentSeason": "Current Season",
+  "TRANSFORMATIONS.Eladrin.ChangeTo": "Change to {season}",
+  "TRANSFORMATIONS.Eladrin.ConfigHeader": "Season Configuration",
+  "TRANSFORMATIONS.Eladrin.SaveCurrent": "Save Current as {season}",
+  "TRANSFORMATIONS.Eladrin.NoImages": "No images saved",
+  "TRANSFORMATIONS.Eladrin.Token": "Token",
+  "TRANSFORMATIONS.Eladrin.Portrait": "Portrait",
+  "TRANSFORMATIONS.Eladrin.ChatChange": "{name} shifts to their {season} aspect.",
+  "TRANSFORMATIONS.Eladrin.NoSeason": "No season set. Choose a season to begin.",
+  "TRANSFORMATIONS.Eladrin.ImageSaved": "Saved current look as {season}.",
+  "TRANSFORMATIONS.Eladrin.NoImagesForSeason": "No images saved for {season}. Save a look first in the configuration section.",
+  "TRANSFORMATIONS.Eladrin.SeasonChanged": "Changed to {season}.",
+
+  "TRANSFORMATIONS.Eladrin.Season.spring": "Spring",
+  "TRANSFORMATIONS.Eladrin.Season.summer": "Summer",
+  "TRANSFORMATIONS.Eladrin.Season.autumn": "Autumn",
+  "TRANSFORMATIONS.Eladrin.Season.winter": "Winter",
+
+  "TRANSFORMATIONS.Error.NotEladrin": "This character is not an Eladrin."
 }

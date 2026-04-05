@@ -44,13 +44,24 @@
         "PLAYER": "OBSERVER",
         "ASSISTANT": "OWNER"
       }
+    },
+    {
+      "name": "5e-transformations-eladrin",
+      "label": "Eladrin Season Items",
+      "path": "packs/5e-transformations-eladrin",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
     }
   ],
   "packFolders": [
     {
       "name": "5e Transformations",
       "sorting": "m",
-      "packs": ["5e-transformations-macros"]
+      "packs": ["5e-transformations-macros", "5e-transformations-eladrin"]
     }
   ],
   "flags": {
