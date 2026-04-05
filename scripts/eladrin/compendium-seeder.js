@@ -37,9 +37,43 @@ export async function getSeasonTrackerItemData(seasonId) {
 }
 
 /**
+ * Get the All Seasons reference item from the compendium.
+ * @returns {Promise<Object|null>}
+ */
+async function getAllSeasonsItemData() {
+  const pack = game.packs.get(ELADRIN_PACK);
+  if (!pack) return null;
+
+  const index = await pack.getIndex();
+  const entry = index.find((e) => e.name === "Eladrin Season: All Seasons");
+  if (!entry) return null;
+
+  const doc = await pack.getDocument(entry._id);
+  return doc?.toObject() ?? null;
+}
+
+/**
+ * Ensure the All Seasons reference item is on the actor (add once, never remove).
+ * @param {Actor5e} actor
+ */
+async function ensureAllSeasonsItem(actor) {
+  const exists = actor.items.find(
+    (i) => i.name === "Eladrin Season: All Seasons" && i.type === "feat"
+  );
+  if (exists) return;
+
+  const itemData = await getAllSeasonsItemData();
+  if (!itemData) return;
+
+  delete itemData._id;
+  await actor.createEmbeddedDocuments("Item", [itemData]);
+}
+
+/**
  * Swap the Fey Step and Eladrin Season items on an actor to match a new season.
  * In MIDI QOL mode: renames the existing Fey Step item to preserve automation.
  * In clean mode: replaces items from the module compendium.
+ * Also ensures the All Seasons reference item is on the sheet.
  * @param {Actor5e} actor
  * @param {string} newSeasonId
  */
@@ -51,6 +85,8 @@ export async function swapSeasonItems(actor, newSeasonId) {
   } else {
     await _swapCleanMode(actor, newSeasonId);
   }
+
+  await ensureAllSeasonsItem(actor);
 }
 
 /**

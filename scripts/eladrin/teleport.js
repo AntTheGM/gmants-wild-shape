@@ -1,4 +1,6 @@
 import { MODULE_ID } from "../const.js";
+import { getCurrentSeason } from "./season-data.js";
+import { SeasonRing } from "./season-particles.js";
 
 /**
  * Register the Fey Step teleport handler.
@@ -41,13 +43,11 @@ async function teleportToken(token, rangeInFeet) {
   const originX = token.center.x;
   const originY = token.center.y;
 
-  // Draw range indicator on the grid layer
-  const rangeCircle = new PIXI.Graphics();
-  rangeCircle.lineStyle(2, 0x4a90d9, 0.8);
-  rangeCircle.beginFill(0x4a90d9, 0.08);
-  rangeCircle.drawCircle(originX, originY, rangePixels);
-  rangeCircle.endFill();
-  canvas.controls.addChild(rangeCircle);
+  // Determine current season for particle theming
+  const seasonId = getCurrentSeason(token.actor) ?? "autumn";
+
+  // Draw seasonal particle ring as range indicator
+  const seasonRing = new SeasonRing(originX, originY, rangePixels, seasonId);
 
   // Ghost token outline that follows the cursor
   const ghost = new PIXI.Graphics();
@@ -138,9 +138,8 @@ async function teleportToken(token, rangeInFeet) {
     }
 
     function cleanup() {
-      canvas.controls.removeChild(rangeCircle);
+      seasonRing.destroy();
       canvas.controls.removeChild(ghost);
-      rangeCircle.destroy();
       ghost.destroy();
       canvas.stage.off("pointermove", onMouseMove);
       canvas.stage.off("pointerdown", onClick);

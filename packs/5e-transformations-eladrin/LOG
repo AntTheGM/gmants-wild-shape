@@ -1,5 +1,5 @@
-2026/04/04-23:05:00.375 846c Delete type=3 #1
-2026/04/04-23:05:00.390 6678 Level-0 table #5: started
-2026/04/04-23:05:00.401 6678 Level-0 table #5: 10478 bytes OK
-2026/04/04-23:05:00.403 6678 Delete type=0 #3
-2026/04/04-23:05:00.408 6678 Manual compaction at level-0 from '!items!trfmFeyStepAutmn1' @ 72057594037927935 : 1 .. '!items.effects!trfmFeyStepWintr1.feyStpFrtnEff001' @ 0 : 0; will stop at (end)
+2026/04/04-23:40:20.835 37fc Delete type=3 #1
+2026/04/04-23:40:20.850 6270 Level-0 table #5: started
+2026/04/04-23:40:20.863 6270 Level-0 table #5: 11742 bytes OK
+2026/04/04-23:40:20.866 6270 Delete type=0 #3
+2026/04/04-23:40:20.870 6270 Manual compaction at level-0 from '!items!trfmFeyStepAutmn1' @ 72057594037927935 : 1 .. '!items.effects!trfmFeyStepWintr1.feyStpFrtnEff001' @ 0 : 0; will stop at (end)
