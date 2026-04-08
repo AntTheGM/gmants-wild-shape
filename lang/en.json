@@ -28,7 +28,7 @@
   "WILDSHAPE.Error.NoPermission": "You don\u0027t have permission to view this creature\u0027s sheet. Ask your GM to adjust compendium permissions.",
 
   "WILDSHAPE.Settings.ShowControlButton": "Show Sidebar Button",
-  "WILDSHAPE.Settings.ShowControlButtonHint": "Display the Wild Shape paw icon in the token controls sidebar. Disable to hide the button (you can still open the dialog via macro).",
+  "WILDSHAPE.Settings.ShowControlButtonHint": "Force the Wild Shape button on in the token controls sidebar. The button auto-appears when you own a druid with Wild Shape; enable this to always show it.",
 
   "WILDSHAPE.Settings.TempHpMultiplier": "Wild Shape Temp HP Multiplier",
   "WILDSHAPE.Settings.TempHpMultiplierHint": "Temporary HP granted on Wild Shape = druid level \u00d7 this number. RAW is 1.",

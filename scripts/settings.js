@@ -13,10 +13,10 @@ export function registerSettings() {
   game.settings.register(MODULE_ID, "showControlButton", {
     name: "WILDSHAPE.Settings.ShowControlButton",
     hint: "WILDSHAPE.Settings.ShowControlButtonHint",
-    scope: "world",
+    scope: "client",
     config: true,
     type: Boolean,
-    default: true,
+    default: false,
     requiresReload: true,
   });
 

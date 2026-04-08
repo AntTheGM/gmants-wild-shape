@@ -23,7 +23,12 @@ Hooks.once("ready", () => {
 // ─── Scene Control Button ────────────────────────────────────────────────────
 
 Hooks.on("getSceneControlButtons", (controls) => {
-  if (!game.settings.get(MODULE_ID, "showControlButton")) return;
+  // Show if player forced the setting on, or if the current user owns a Wild Shape actor
+  const settingOn = game.settings.get(MODULE_ID, "showControlButton");
+  const ownsWildShaper = game.actors?.some(
+    (a) => a.isOwner && canWildShape(a)
+  );
+  if (!settingOn && !ownsWildShaper) return;
 
   const tokenControls = controls.tokens;
   if (!tokenControls) return;
