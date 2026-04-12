@@ -148,15 +148,6 @@ export class TransformationDialog extends HandlebarsApplicationMixin(Application
    * (buttons, anchors), so divs need manual binding.
    */
   #bindCardClicks() {
-    // Transform form cards
-    for (const card of this.element.querySelectorAll(".wild-shape-form-card[data-uuid]")) {
-      card.addEventListener("click", async (event) => {
-        if (event.target.closest(".wild-shape-preview-btn")) return;
-        const uuid = card.dataset.uuid;
-        if (uuid) await this.#handleTransform(uuid);
-      });
-    }
-
     // Onboarding beast entries (click row to preview)
     for (const entry of this.element.querySelectorAll(".wild-shape-beast-entry[data-uuid]")) {
       entry.addEventListener("click", async (event) => {
@@ -316,7 +307,7 @@ export class TransformationDialog extends HandlebarsApplicationMixin(Application
   }
 
   /**
-   * Core transformation logic — called from both action handler and click listener.
+   * Core transformation logic.
    */
   async #handleTransform(uuid) {
     const originalActor = this.#getOriginalActor();
