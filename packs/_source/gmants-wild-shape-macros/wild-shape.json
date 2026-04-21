@@ -3,7 +3,7 @@
   "name": "Wild Shape",
   "type": "script",
   "author": "SYixMRBTMbFoSMVo",
-  "command": "const mod = game.modules.get('gmants-wild-shape');\nif (!mod?.active) {\n  ui.notifications.error('GMAnt's Wild Shape module is not active.');\n} else {\n  mod.api.open();\n}",
+  "command": "const mod = game.modules.get('gmants-wild-shape');\nif (!mod?.active) {\n  ui.notifications.error(\"GMAnt's Wild Shape module is not active.\");\n} else {\n  mod.api.open();\n}",
   "scope": "global",
   "img": "icons/creatures/mammals/dog-husky-white-blue.webp",
   "folder": null,
